@@ -2,7 +2,7 @@
 import { FC } from 'react';
 
 // Components
-
+import { LoginPage } from './pages/login';
 
 // Instruments
 
@@ -10,7 +10,7 @@ import { FC } from 'react';
 export const App: FC = () => {
     return (
         <main>
-            <h1>Органайзер</h1>
+            <LoginPage />
         </main>
     );
 };
