@@ -1,5 +1,6 @@
 // Core
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 
@@ -16,7 +17,9 @@ import 'react-toastify/dist/ReactToastify.css';
 render(
     <Provider store = { store }>
         <QueryClientProvider client = { queryClient }>
-            <App />
+            <Router>
+                <App />
+            </Router>
         </QueryClientProvider>
     </Provider>,
     document.getElementById('root'),

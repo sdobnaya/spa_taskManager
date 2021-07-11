@@ -5,13 +5,11 @@ import { schema } from './config';
 // import { useLogin } from '../../../hooks/useLogin';
 import { Input } from '../elements/input';
 
-export const ActualLoginForm = () => {
+export const ActualSignupForm = () => {
     const form = useForm({
         mode: 'onTouched',
         resolver: yupResolver(schema),
     });
-
-    console.log({ form });
 
     // const logIn = form.handleSubmit(async (data) => {
     //     await login.mutateAsync(data);
@@ -19,10 +17,19 @@ export const ActualLoginForm = () => {
     // });
 
     return (
-        <section className = 'sign-form'>
+        <section className = 'publish-tip sign-form'>
             <form> { /* <form onSubmit = { logIn }>  */ }
                 <fieldset> { /* <fieldset disabled = { login.isLoading }>  */ }
-                    <legend>Вход</legend>
+                    <legend>Регистрация</legend>
+                    <label className = 'label'>
+                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.name}` }</span> */ }
+                        <Input
+                            placeholder = 'Имя и фамилия'
+                            type = 'text'
+                            error = { form.formState.errors.name }
+                            register = { form.register('name') }
+                            name = 'name' />
+                    </label>
                     <label className = 'label'>
                         { /* <span className = 'errorMessage'>{ `${form.formState.errors.email}` }</span> */ }
                         <Input
@@ -41,12 +48,21 @@ export const ActualLoginForm = () => {
                             register = { form.register('password') }
                             name = 'password' />
                     </label>
+                    <label className = 'label'>
+                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.confirmPassword}` }</span> */ }
+                        <Input
+                            placeholder = 'Подтверждение пароля'
+                            type = 'password'
+                            error = { form.formState.errors.confirmPassword }
+                            register = { form.register('confirmPassword') }
+                            name = 'confirmPassword' />
+                    </label>
                     <input
                         className = 'button-login'
                         type = 'submit'
-                        value = 'Войти' />
+                        value = 'Зарегестрироваться' />
                 </fieldset>
-                <p>Если у вас до сих пор нет учетной записи, вы можете <Link to = '/signup'>зарегестрироваться </Link></p>
+                <p>Перейти к <Link to = '/login'> логину</Link></p>
             </form>
         </section>
     );

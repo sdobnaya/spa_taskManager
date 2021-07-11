@@ -4,14 +4,14 @@ import { FC } from 'react';
 /* Components */
 import { Footer } from '../components/Footer';
 import { Nav } from '../components/Nav';
-import { ActualLoginForm } from '../components/forms/loginForm';
+import { ActualSignupForm } from '../components/forms/signupForm';
 
-export const LoginPage: FC = () => {
+export const SignupPage: FC = () => {
     return (
         <>
             <Nav />
             <main>
-                <ActualLoginForm />
+                <ActualSignupForm />
             </main>
             <Footer />
         </>

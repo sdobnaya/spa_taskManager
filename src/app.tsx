@@ -1,17 +1,23 @@
 // Core
 import { FC } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Components
-import { LoginPage } from './pages/login';
+import { LoginPage, SignupPage } from './pages';
 
 // Instruments
 
 
 export const App: FC = () => {
     return (
-        <main>
-            <LoginPage />
-        </main>
+        <>
+            <Routes>
+                <Route path = '/signup' element = { <SignupPage /> } />
+                <Route path = '/login' element = { <LoginPage /> } />
+
+                <Route path = '*' element = { <Navigate to = '/login' /> } />
+            </Routes>
+        </>
     );
 };
 
