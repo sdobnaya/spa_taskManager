@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +12,9 @@ export const ActualLoginForm = () => {
         resolver: yupResolver(schema),
     });
 
-    console.log({ form });
+    // console.log(form);
+    // console.log(form.formState.errors.email);
+
 
     // const logIn = form.handleSubmit(async (data) => {
     //     await login.mutateAsync(data);
@@ -24,20 +27,18 @@ export const ActualLoginForm = () => {
                 <fieldset> { /* <fieldset disabled = { login.isLoading }>  */ }
                     <legend>Вход</legend>
                     <label className = 'label'>
-                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.email}` }</span> */ }
+                        <span className = 'errorMessage'>{ form.formState.errors.email?.message }</span>
                         <Input
                             placeholder = 'Электропочта'
                             type = 'text'
-                            error = { form.formState.errors.email }
                             register = { form.register('email') }
                             name = 'email' />
                     </label>
                     <label className = 'label'>
-                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.password}` }</span> */ }
+                        <span className = 'errorMessage'>{ form.formState.errors.password?.message }</span>
                         <Input
                             placeholder = 'Пароль'
                             type = 'password'
-                            error = { form.formState.errors.password }
                             register = { form.register('password') }
                             name = 'password' />
                     </label>

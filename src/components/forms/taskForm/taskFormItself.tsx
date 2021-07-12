@@ -21,10 +21,12 @@ export const ActualTaskForm = () => {
                 <div className = 'content'>
                     <label className = 'label'>
                         Задача
-                        <input
+                        <Input
                             className = 'title'
                             placeholder = 'Пройти интенсив по React + Redux'
                             type = 'text'
+                            error = { form.formState.errors.title }
+                            register = { form.register('title') }
                             name = 'title' />
                     </label>
                     <div className = 'deadline'>
@@ -40,18 +42,21 @@ export const ActualTaskForm = () => {
                     <div className = 'description'>
                         <label className = 'label'>
                             Описание
-                            <textarea
+                            <Input
                                 className = 'text'
                                 placeholder = 'Изучить все технологии в сочетании со специальными библиотеками'
-                                name = 'description' />
+                                name = 'description'
+                                tag = 'textarea'
+                                error = { form.formState.errors.text }
+                                register = { form.register('text') } />
                         </label>
                     </div>
                     <div className = 'tags'>
-                        <span className = 'tag' style = 'color: rgb(255, 171, 43); background-color: rgb(255, 250, 240);'>Sketch</span>
-                        <span className = 'tag' style = 'color: rgb(109, 210, 48); background-color: rgb(245, 253, 240);'>Spotify</span>
-                        <span className = 'tag' style = 'color: rgb(254, 77, 151); background-color: rgb(255, 244, 249);'>Dribble</span>
-                        <span className = 'tag' style = 'color: rgb(77, 124, 254); background-color: rgb(240, 243, 251);'>Behance</span>
-                        <span className = 'tag' style = 'color: rgb(134, 134, 134); background-color: rgb(236, 236, 236);'>UX</span>
+                        <span className = 'tag' >Sketch</span>
+                        <span className = 'tag' >Spotify</span>
+                        <span className = 'tag' >Dribble</span>
+                        <span className = 'tag' >Behance</span>
+                        <span className = 'tag' >UX</span>
                     </div>
                     <div className = 'errors' />
                     <div className = 'form-controls'>
@@ -63,3 +68,9 @@ export const ActualTaskForm = () => {
         </div>
     );
 };
+
+// style = 'color: rgb(255, 171, 43); background-color: rgb(255, 250, 240);'
+// style = 'color: rgb(109, 210, 48); background-color: rgb(245, 253, 240);'
+// style = 'color: rgb(254, 77, 151); background-color: rgb(255, 244, 249);'
+// style = 'color: rgb(77, 124, 254); background-color: rgb(240, 243, 251);'
+// style = 'color: rgb(134, 134, 134); background-color: rgb(236, 236, 236);'

@@ -22,38 +22,34 @@ export const ActualSignupForm = () => {
                 <fieldset> { /* <fieldset disabled = { login.isLoading }>  */ }
                     <legend>Регистрация</legend>
                     <label className = 'label'>
-                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.name}` }</span> */ }
+                        <span className = 'errorMessage'>{ form.formState.errors.name?.message }</span>
                         <Input
                             placeholder = 'Имя и фамилия'
                             type = 'text'
-                            error = { form.formState.errors.name }
                             register = { form.register('name') }
                             name = 'name' />
                     </label>
                     <label className = 'label'>
-                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.email}` }</span> */ }
+                        <span className = 'errorMessage'>{ form.formState.errors.email?.message }</span>
                         <Input
                             placeholder = 'Электропочта'
                             type = 'text'
-                            error = { form.formState.errors.email }
                             register = { form.register('email') }
                             name = 'email' />
                     </label>
                     <label className = 'label'>
-                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.password}` }</span> */ }
+                        <span className = 'errorMessage'>{ form.formState.errors.password?.message }</span>
                         <Input
                             placeholder = 'Пароль'
                             type = 'password'
-                            error = { form.formState.errors.password }
                             register = { form.register('password') }
                             name = 'password' />
                     </label>
                     <label className = 'label'>
-                        { /* <span className = 'errorMessage'>{ `${form.formState.errors.confirmPassword}` }</span> */ }
+                        <span className = 'errorMessage'>{ form.formState.errors.confirmPassword?.message }</span>
                         <Input
                             placeholder = 'Подтверждение пароля'
                             type = 'password'
-                            error = { form.formState.errors.confirmPassword }
                             register = { form.register('confirmPassword') }
                             name = 'confirmPassword' />
                     </label>
