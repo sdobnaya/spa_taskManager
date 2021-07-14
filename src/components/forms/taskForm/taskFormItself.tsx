@@ -1,15 +1,20 @@
+// @ts-nocheck
 // import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
 // import { useLogin } from '../../../hooks/useLogin';
-import { Input } from '../elements/input';
+// import { Input } from '../elements/input';
+// hooks
+import { useCalendar } from '../../../hooks/useCalendar';
 
 export const ActualTaskForm = () => {
     const form = useForm({
-        mode: 'onTouched',
+        mode:     'onTouched',
         resolver: yupResolver(schema),
     });
+
+    const Calendar = useCalendar();
 
     return (
         <div className = 'task-card'>
@@ -21,44 +26,38 @@ export const ActualTaskForm = () => {
                 <div className = 'content'>
                     <label className = 'label'>
                         Задача
-                        <Input
+                        <input
+                            { ...form.register('title') }
                             className = 'title'
                             placeholder = 'Пройти интенсив по React + Redux'
-                            type = 'text'
-                            error = { form.formState.errors.title }
-                            register = { form.register('title') }
-                            name = 'title' />
+                            type = 'text' />
                     </label>
                     <div className = 'deadline'>
                         <span className = 'label'>Дедлайн</span>
                         <span className = 'date'>
-                            <div className = 'react-datepicker-wrapper'>
-                                <div className = 'react-datepicker__input-container'>
-                                    <input type = 'text' value = 'Маньяна' />
-                                </div>
-                            </div>
+                            { Calendar }
                         </span>
                     </div>
                     <div className = 'description'>
                         <label className = 'label'>
                             Описание
-                            <Input
+                            <input
+                                { ...form.register('description') }
                                 className = 'text'
-                                placeholder = 'Изучить все технологии в сочетании со специальными библиотеками'
-                                name = 'description'
-                                tag = 'textarea'
-                                error = { form.formState.errors.text }
-                                register = { form.register('text') } />
+                                placeholder = 'Изучить все технологии в сочетании со специальными библиотеками' />
                         </label>
                     </div>
                     <div className = 'tags'>
-                        <span className = 'tag' >Sketch</span>
-                        <span className = 'tag' >Spotify</span>
-                        <span className = 'tag' >Dribble</span>
-                        <span className = 'tag' >Behance</span>
-                        <span className = 'tag' >UX</span>
+                        <span style = { { color: 'rgb(255, 171, 43)', backgroundColor: 'rgb(255, 250, 240)' } } className = 'tag' >Sketch</span>
+                        <span style = { { color: 'rgb(109, 210, 48)', backgroundColor: 'rgb(245, 253, 240)' } } className = 'tag' >Spotify</span>
+                        <span style = { { color: 'rgb(254, 77, 151)', backgroundColor: 'rgb(255, 244, 249)' } } className = 'tag' >Dribble</span>
+                        <span style = { { color: 'rgb(77, 124, 254)', backgroundColor: 'rgb(240, 243, 251)' } } className = 'tag' >Behance</span>
+                        <span style = { { color: 'rgb(134, 134, 134)', backgroundColor: 'rgb(236, 236, 236)' } } className = 'tag' >UX</span>
                     </div>
-                    <div className = 'errors' />
+                    <div className = 'errors'>
+                        <p className = 'errorMessage'>{ form.formState.errors?.title?.message }</p>
+                        <p className = 'errorMessage'>{ form.formState.errors?.description?.message }</p>
+                    </div>
                     <div className = 'form-controls'>
                         <button className = 'button-reset-task' type = 'reset'>Reset</button>
                         <button className = 'button-save-task' type = 'submit'>Save</button>
@@ -69,8 +68,3 @@ export const ActualTaskForm = () => {
     );
 };
 
-// style = 'color: rgb(255, 171, 43); background-color: rgb(255, 250, 240);'
-// style = 'color: rgb(109, 210, 48); background-color: rgb(245, 253, 240);'
-// style = 'color: rgb(254, 77, 151); background-color: rgb(255, 244, 249);'
-// style = 'color: rgb(77, 124, 254); background-color: rgb(240, 243, 251);'
-// style = 'color: rgb(134, 134, 134); background-color: rgb(236, 236, 236);'
