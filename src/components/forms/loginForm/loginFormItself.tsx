@@ -3,28 +3,26 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
-// import { useLogin } from '../../../hooks/useLogin';
+import { useLogin } from '../../../hooks/useLogin';
 import { Input } from '../elements/input';
 
 export const ActualLoginForm = () => {
+    const login = useLogin();
+
     const form = useForm({
-        mode: 'onTouched',
+        mode:     'onTouched',
         resolver: yupResolver(schema),
     });
 
-    // console.log(form);
-    // console.log(form.formState.errors.email);
-
-
-    // const logIn = form.handleSubmit(async (data) => {
-    //     await login.mutateAsync(data);
-    //     form.reset();
-    // });
+    const logIn = form.handleSubmit(async (data) => {
+        await login.mutateAsync(data);
+        form.reset();
+    });
 
     return (
         <section className = 'sign-form'>
-            <form> { /* <form onSubmit = { logIn }>  */ }
-                <fieldset> { /* <fieldset disabled = { login.isLoading }>  */ }
+            <form onSubmit = { logIn }>
+                <fieldset disabled = { login.isLoading }>
                     <legend>Вход</legend>
                     <label className = 'label'>
                         <span className = 'errorMessage'>{ form.formState.errors.email?.message }</span>

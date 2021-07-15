@@ -2,24 +2,26 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
-// import { useLogin } from '../../../hooks/useLogin';
+import { useSignup } from '../../../hooks/useSignup';
 import { Input } from '../elements/input';
 
 export const ActualSignupForm = () => {
+    const signup = useSignup();
+
     const form = useForm({
-        mode: 'onTouched',
+        mode:     'onTouched',
         resolver: yupResolver(schema),
     });
 
-    // const logIn = form.handleSubmit(async (data) => {
-    //     await login.mutateAsync(data);
-    //     form.reset();
-    // });
+    const signUp = form.handleSubmit(async (data) => {
+        await signup.mutateAsync(data);
+        form.reset();
+    });
 
     return (
         <section className = 'publish-tip sign-form'>
-            <form> { /* <form onSubmit = { logIn }>  */ }
-                <fieldset> { /* <fieldset disabled = { login.isLoading }>  */ }
+            <form onSubmit = { signUp }>
+                <fieldset disabled = { signup.isLoading }>
                     <legend>Регистрация</legend>
                     <label className = 'label'>
                         <span className = 'errorMessage'>{ form.formState.errors.name?.message }</span>
