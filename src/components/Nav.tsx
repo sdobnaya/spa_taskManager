@@ -2,21 +2,18 @@
 /* Core */
 import { NavLink } from 'react-router-dom';
 
-// import { useLogout } from '../hooks/useLogout';
+import { useLogout } from '../hooks/useLogout';
 
 export const Nav = () => {
-    // const logout = useLogout();
-    // console.log('1', logout);
-
     return (
         <nav>
             <NavLink className = '' to = '/login'>
                 Войти
             </NavLink>
             <NavLink
-                // onClick = { useLogout() }
+                onClick = { useLogout }
                 className = ''
-                to = ''>
+                to = '/signup'>
                 Выйти
             </NavLink>
             <NavLink to = '/task-manager'>

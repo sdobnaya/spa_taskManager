@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 // Core
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -15,13 +16,42 @@ import './theme/styles/index.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { TaskContext } from './context/taskContext';
+
+class TaskForm {
+    isVisible = false;
+    constructor() {
+        this.isVisible = false;
+        this.setIsVisible.bind(this);
+    }
+
+    setIsVisible() {
+        this.isVisible = !this.isVisible;
+    }
+}
+
+// const rectangle = new Rectangle();
+
+
+// class TaskForm {
+//     isVisible = false;
+//     // eslint-disable-next-line
+//     constructor() {}
+//     setIsVisible() { this.isVisible = !this.isVisible; }
+// }
+
+const taskForm = new TaskForm();
+
+
 render(
     <Provider store = { store }>
-        <QueryClientProvider client = { queryClient }>
-            <Router>
-                <App />
-            </Router>
-        </QueryClientProvider>
+        <TaskContext.Provider value = { taskForm }>
+            <QueryClientProvider client = { queryClient }>
+                <Router>
+                    <App />
+                </Router>
+            </QueryClientProvider>
+        </TaskContext.Provider>
     </Provider>,
     document.getElementById('root'),
     () => {
