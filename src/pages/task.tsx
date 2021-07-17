@@ -21,6 +21,7 @@ export const TaskPage: FC = () => {
                 <Controls />
                 <div className = 'wrap' >
                     <EmptyList />
+                    { console.log('task.tsx', taskContextValue.isVisible) }
                     { taskContextValue.isVisible === true ? <ActualTaskForm /> : null }
                 </div>
             </main>

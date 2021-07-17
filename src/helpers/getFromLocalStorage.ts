@@ -1,4 +1,4 @@
 // @ts-nocheck
-export const useToGetFromLocalStorage = (token) => {
+export const getFromLocalStorage = (token) => {
     return localStorage.getItem(token);
 };

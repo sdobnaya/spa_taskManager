@@ -1,12 +1,10 @@
 /* Core */
-// import { useMutation, useQueryClient } from 'react-query';
-// import { useNavigate } from 'react-router-dom';
 
 import { api } from '../api';
-import { useToGetFromLocalStorage } from './useToGetFromLocalStorage';
+import { getFromLocalStorage } from '../helpers/getFromLocalStorage';
 
 export const useLogout = () => {
-    const token = useToGetFromLocalStorage('token');
+    const token = getFromLocalStorage('token');
 
     localStorage.removeItem('token');
 

@@ -7,6 +7,7 @@ import { schema } from './config';
 // import { Input } from '../elements/input';
 // hooks
 import { useCalendar } from '../../../hooks/useCalendar';
+import { chooseTag } from '../../../helpers/chooseTag';
 
 export const ActualTaskForm = () => {
     const form = useForm({
@@ -48,11 +49,26 @@ export const ActualTaskForm = () => {
                         </label>
                     </div>
                     <div className = 'tags'>
-                        <span style = { { color: 'rgb(255, 171, 43)', backgroundColor: 'rgb(255, 250, 240)' } } className = 'tag' >Sketch</span>
-                        <span style = { { color: 'rgb(109, 210, 48)', backgroundColor: 'rgb(245, 253, 240)' } } className = 'tag' >Spotify</span>
-                        <span style = { { color: 'rgb(254, 77, 151)', backgroundColor: 'rgb(255, 244, 249)' } } className = 'tag' >Dribble</span>
-                        <span style = { { color: 'rgb(77, 124, 254)', backgroundColor: 'rgb(240, 243, 251)' } } className = 'tag' >Behance</span>
-                        <span style = { { color: 'rgb(134, 134, 134)', backgroundColor: 'rgb(236, 236, 236)' } } className = 'tag' >UX</span>
+                        <span
+                            onClick = { chooseTag }
+                            style = { { color: 'rgb(255, 171, 43)', backgroundColor: 'rgb(255, 250, 240)' } }
+                            className = 'tag' >Sketch</span>
+                        <span
+                            onClick = { chooseTag }
+                            style = { { color: 'rgb(109, 210, 48)', backgroundColor: 'rgb(245, 253, 240)' } }
+                            className = 'tag' >Spotify</span>
+                        <span
+                            onClick = { chooseTag }
+                            style = { { color: 'rgb(254, 77, 151)', backgroundColor: 'rgb(255, 244, 249)' } }
+                            className = 'tag' >Dribble</span>
+                        <span
+                            onClick = { chooseTag }
+                            style = { { color: 'rgb(77, 124, 254)', backgroundColor: 'rgb(240, 243, 251)' } }
+                            className = 'tag' >Behance</span>
+                        <span
+                            onClick = { chooseTag }
+                            style = { { color: 'rgb(134, 134, 134)', backgroundColor: 'rgb(236, 236, 236)' } }
+                            className = 'tag' >UX</span>
                     </div>
                     <div className = 'errors'>
                         <p className = 'errorMessage'>{ form.formState.errors?.title?.message }</p>

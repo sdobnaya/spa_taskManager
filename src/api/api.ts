@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Core
 import axios from 'axios';
-import { useToSetInLocalStorage } from '../hooks/useToSetInLocalStorage';
+import { setInLocalStorage } from '../helpers/setInLocalStorage';
 
 export const TODO_API_URL = 'https://lab.lectrum.io/rtx/api/v2/todos';
 
@@ -99,7 +99,7 @@ export const api = Object.freeze({
             body,
         );
 
-        useToSetInLocalStorage(data.data);
+        setInLocalStorage(data.data);
 
         return data;
     },
@@ -114,7 +114,7 @@ export const api = Object.freeze({
             },
         );
 
-        useToSetInLocalStorage(data.data);
+        setInLocalStorage(data.data);
 
         return data;
     },

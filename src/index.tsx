@@ -19,14 +19,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TaskContext } from './context/taskContext';
 
 class TaskForm {
-    isVisible = false;
+    // isVisible = true;
     constructor() {
-        this.isVisible = false;
-        this.setIsVisible.bind(this);
+        this.isVisible = true;
+        this.setIsVisible = this.setIsVisible.bind(this);
     }
 
     setIsVisible() {
+        console.log('1', this.isVisible);
         this.isVisible = !this.isVisible;
+        console.log('2', this.isVisible);
     }
 }
 

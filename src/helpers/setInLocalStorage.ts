@@ -1,4 +1,4 @@
 // @ts-nocheck
-export const useToSetInLocalStorage = (token) => {
+export const setInLocalStorage = (token) => {
     localStorage.setItem('token', token);
 };
