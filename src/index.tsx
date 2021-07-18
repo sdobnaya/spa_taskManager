@@ -1,6 +1,6 @@
 // @ts-nocheck
-
 // Core
+import { useState } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
@@ -32,8 +32,9 @@ class TaskForm {
     }
 }
 
-// const rectangle = new Rectangle();
+const taskForm = new TaskForm();
 
+// const rectangle = new Rectangle();
 
 // class TaskForm {
 //     isVisible = false;
@@ -42,8 +43,13 @@ class TaskForm {
 //     setIsVisible() { this.isVisible = !this.isVisible; }
 // }
 
-const taskForm = new TaskForm();
 
+// () => {
+//     const [isVisible, setVisible] = useState();
+//     const taskForm = { isVisible, setVisible };
+
+//     return taskForm;
+// };
 
 render(
     <Provider store = { store }>
