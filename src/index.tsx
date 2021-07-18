@@ -1,6 +1,5 @@
 // @ts-nocheck
 // Core
-import { useState } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
@@ -16,23 +15,43 @@ import './theme/styles/index.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { TaskContext } from './context/taskContext';
+// import { TaskContext } from './context/taskContext';
 
-class TaskForm {
-    // isVisible = true;
-    constructor() {
-        this.isVisible = true;
-        this.setIsVisible = this.setIsVisible.bind(this);
-    }
+import { TaskContextProvider } from './context/newContext';
 
-    setIsVisible() {
-        console.log('1', this.isVisible);
-        this.isVisible = !this.isVisible;
-        console.log('2', this.isVisible);
-    }
-}
+// class TaskForm {
+//     // isVisible = true;
+//     constructor() {
+//         this.isVisible = true;
+//         this.setIsVisible = this.setIsVisible.bind(this);
+//     }
 
-const taskForm = new TaskForm();
+//     setIsVisible() {
+//         console.log('1', this.isVisible);
+//         this.isVisible = !this.isVisible;
+//         console.log('2', this.isVisible);
+//     }
+// }
+
+// const taskForm = new TaskForm();taskForm
+
+
+render(
+    <Provider store = { store }>
+        <TaskContextProvider>
+            <QueryClientProvider client = { queryClient }>
+                <Router>
+                    <App />
+                </Router>
+            </QueryClientProvider>
+        </TaskContextProvider>
+    </Provider>,
+    document.getElementById('root'),
+    () => {
+        // eslint-disable-next-line no-console
+        console.log('%c Приложение успешно запущено ', 'background: #00ff00; color: #000000; padding: 2.5px;');
+    },
+);
 
 // const rectangle = new Rectangle();
 
@@ -50,20 +69,3 @@ const taskForm = new TaskForm();
 
 //     return taskForm;
 // };
-
-render(
-    <Provider store = { store }>
-        <TaskContext.Provider value = { taskForm }>
-            <QueryClientProvider client = { queryClient }>
-                <Router>
-                    <App />
-                </Router>
-            </QueryClientProvider>
-        </TaskContext.Provider>
-    </Provider>,
-    document.getElementById('root'),
-    () => {
-        // eslint-disable-next-line no-console
-        console.log('%c Приложение успешно запущено ', 'background: #00ff00; color: #000000; padding: 2.5px;');
-    },
-);

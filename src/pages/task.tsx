@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* Core */
 // import { render } from 'react-dom';
-import { FC, useContext, Consumer } from 'react';
+import { FC, useContext } from 'react';
 
 /* Components */
 import { Footer } from '../components/Footer';
@@ -9,10 +9,10 @@ import { Nav } from '../components/Nav';
 import { EmptyList } from '../components/EmptyList';
 import { Controls } from '../components/Controls';
 import { ActualTaskForm } from '../components/forms/taskForm';
-import { TaskContext } from '../context/taskContext';
+import { TaskContext } from '../context/newContext';
 
 export const TaskPage: FC = () => {
-    const taskContextValue = useContext(TaskContext);
+    const state = useContext(TaskContext);
 
 
     return (
@@ -22,15 +22,11 @@ export const TaskPage: FC = () => {
                 <Controls />
                 <div className = 'wrap' >
                     <EmptyList />
-                    { console.log('task.tsx', taskContextValue.isVisible) }
-                    <TaskContext.Consumer>{ (taskContextValue) => { taskContextValue.isVisible === true ? <ActualTaskForm /> : null; } }</TaskContext.Consumer>
+                    { console.log('task.tsx', state.isVisible) }
+                    { state.isVisible === true ? <ActualTaskForm /> : null }
                 </div>
             </main>
             <Footer />
         </>
     );
 };
-
-// <TaskContext.Consumer>
-// { (isVisible) => { taskContextValue.isVisible === true ? <ActualTaskForm /> : null; console.log('ZZZZZZZ'); } }
-// </TaskContext.Consumer>
