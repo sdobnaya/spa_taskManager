@@ -15,26 +15,7 @@ import './theme/styles/index.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import { TaskContext } from './context/taskContext';
-
-import { TaskContextProvider } from './context/newContext';
-
-// class TaskForm {
-//     // isVisible = true;
-//     constructor() {
-//         this.isVisible = true;
-//         this.setIsVisible = this.setIsVisible.bind(this);
-//     }
-
-//     setIsVisible() {
-//         console.log('1', this.isVisible);
-//         this.isVisible = !this.isVisible;
-//         console.log('2', this.isVisible);
-//     }
-// }
-
-// const taskForm = new TaskForm();taskForm
-
+import { TaskContextProvider } from './context/taskContext';
 
 render(
     <Provider store = { store }>
@@ -52,20 +33,3 @@ render(
         console.log('%c Приложение успешно запущено ', 'background: #00ff00; color: #000000; padding: 2.5px;');
     },
 );
-
-// const rectangle = new Rectangle();
-
-// class TaskForm {
-//     isVisible = false;
-//     // eslint-disable-next-line
-//     constructor() {}
-//     setIsVisible() { this.isVisible = !this.isVisible; }
-// }
-
-
-// () => {
-//     const [isVisible, setVisible] = useState();
-//     const taskForm = { isVisible, setVisible };
-
-//     return taskForm;
-// };

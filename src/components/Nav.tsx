@@ -1,7 +1,6 @@
 // @ts-nocheck
 /* Core */
 import { NavLink } from 'react-router-dom';
-
 import { useLogout } from '../hooks/useLogout';
 
 export const Nav = () => {

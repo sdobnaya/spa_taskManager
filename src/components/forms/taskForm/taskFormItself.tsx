@@ -1,10 +1,7 @@
 // @ts-nocheck
-// import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
-// import { useLogin } from '../../../hooks/useLogin';
-// import { Input } from '../elements/input';
 // hooks
 import { useCalendar } from '../../../hooks/useCalendar';
 import { chooseTag } from '../../../helpers/chooseTag';

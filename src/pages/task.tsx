@@ -9,7 +9,7 @@ import { Nav } from '../components/Nav';
 import { EmptyList } from '../components/EmptyList';
 import { Controls } from '../components/Controls';
 import { ActualTaskForm } from '../components/forms/taskForm';
-import { TaskContext } from '../context/newContext';
+import { TaskContext } from '../context/taskContext';
 
 export const TaskPage: FC = () => {
     const state = useContext(TaskContext);
@@ -22,7 +22,6 @@ export const TaskPage: FC = () => {
                 <Controls />
                 <div className = 'wrap' >
                     <EmptyList />
-                    { console.log('task.tsx', state.isVisible) }
                     { state.isVisible === true ? <ActualTaskForm /> : null }
                 </div>
             </main>

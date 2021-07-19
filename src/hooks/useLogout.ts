@@ -1,5 +1,4 @@
 /* Core */
-
 import { api } from '../api';
 import { getFromLocalStorage } from '../helpers/getFromLocalStorage';
 

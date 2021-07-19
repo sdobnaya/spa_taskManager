@@ -7,7 +7,6 @@ import { LoginPage, SignupPage, TaskPage } from './pages';
 
 // Instruments
 
-
 export const App: FC = () => {
     return (
         <>
