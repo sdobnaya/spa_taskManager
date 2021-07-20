@@ -32,7 +32,7 @@ export const ActualTaskForm = () => {
                     </label>
                     <div className = 'deadline'>
                         <span className = 'label'>Дедлайн</span>
-                        <span className = 'date'>
+                        <span className = 'date' >
                             { Calendar }
                         </span>
                     </div>

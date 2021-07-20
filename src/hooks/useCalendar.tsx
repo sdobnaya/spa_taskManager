@@ -17,6 +17,6 @@ export const useCalendar = () => {
             locale = { ru }
             placeholderText = 'Выберите дату'
             dateFormat = 'dd/MM/yyyy'
-            showDisabledMonthNavigation />
+            showDisabledMonthNavigation/>
     );
 };
