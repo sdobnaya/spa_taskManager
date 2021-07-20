@@ -28,8 +28,8 @@ export const Nav = () => {
             { !userState.loggedIn
                 ? <> <NavLink
                     className = ''
-                    to = '/signup'>Войти</NavLink>
-                <NavLink to = '/task-manager'>К задачам</NavLink> </> : null
+                    to = '/login'>Войти</NavLink>
+                <NavLink to = '/signup'>К задачам</NavLink> </> : null
             }
         </nav>
     );

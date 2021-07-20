@@ -1,12 +1,17 @@
+// @ts-nocheck
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
+
 import { useSignup } from '../../../hooks/useSignup';
 import { Input } from '../elements/input';
+import { UserContext } from '../../../context/userContext';
 
 export const ActualSignupForm = () => {
     const signup = useSignup();
+    const userState = useContext(UserContext);
 
     const form = useForm({
         mode:     'onTouched',
@@ -14,6 +19,8 @@ export const ActualSignupForm = () => {
     });
 
     const signUp = form.handleSubmit(async (data) => {
+        userState.toggle(userState.loggedIn);
+
         await signup.mutateAsync(data);
         form.reset();
     });

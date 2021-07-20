@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { api } from '../api';
 
+
 export const useLogin = () => {
     const client = useQueryClient();
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export const useLogin = () => {
             },
             onSuccess() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                // userState.toggle(userState.loggedIn); - убрать?
                 navigate('/task-manager');
             },
             onSettled() {
