@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
 // hooks
 import { useCalendar } from '../../../hooks/useCalendar';
+import { useCreate } from '../../../hooks/useCreateTodo';
 
 import { chooseTag } from '../../../helpers/chooseTag';
 
@@ -15,6 +16,14 @@ export const ActualTaskForm = () => {
     });
 
     const Calendar = useCalendar();
+    const creation = useCreate();
+
+    const toCreate = form.handleSubmit(async (data) => {
+        await creation.mutateAsync(data);
+        console.log('tuuuuuuuut');
+
+        form.reset();
+    });
 
     return (
         <div className = 'task-card'>
@@ -75,7 +84,10 @@ export const ActualTaskForm = () => {
                     </div>
                     <div className = 'form-controls'>
                         <button className = 'button-reset-task' type = 'reset'>Reset</button>
-                        <button className = 'button-save-task' type = 'submit'>Save</button>
+                        <button
+                            onClick = { toCreate }
+                            className = 'button-save-task'
+                            type = 'submit'>Save</button>
                     </div>
                 </div>
             </form>
