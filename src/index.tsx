@@ -16,16 +16,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { TaskContextProvider } from './context/taskContext';
+import { UserContextProvider } from './context/userContext';
 
 render(
     <Provider store = { store }>
-        <TaskContextProvider>
-            <QueryClientProvider client = { queryClient }>
-                <Router>
-                    <App />
-                </Router>
-            </QueryClientProvider>
-        </TaskContextProvider>
+        <UserContextProvider>
+            <TaskContextProvider>
+                <QueryClientProvider client = { queryClient }>
+                    <Router>
+                        <App />
+                    </Router>
+                </QueryClientProvider>
+            </TaskContextProvider>
+        </UserContextProvider>
     </Provider>,
     document.getElementById('root'),
     () => {
