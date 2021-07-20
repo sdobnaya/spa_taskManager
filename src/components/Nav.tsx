@@ -29,7 +29,9 @@ export const Nav = () => {
                 ? <> <NavLink
                     className = ''
                     to = '/login'>Войти</NavLink>
-                <NavLink to = '/signup'>К задачам</NavLink> </> : null
+                <NavLink
+                    to = ''
+                    style = { { color: '#98a9bc', cursor: 'not-allowed' } }>К задачам</NavLink> </> : null
             }
         </nav>
     );
