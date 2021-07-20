@@ -10,7 +10,7 @@ export const Nav = () => {
     const userState = useContext(UserContext);
 
     const logoutActions = () => {
-        useLogout;
+        useLogout();
         userState.toggle(userState.loggedIn);
         console.log('logoutActions', userState.loggedIn);
     };
@@ -37,19 +37,3 @@ export const Nav = () => {
     );
 };
 
-// return (
-//     <nav>
-//         <NavLink className = '' to = '/login'>
-//             Войти
-//         </NavLink>
-//         <NavLink
-//             onClick = { useLogout }
-//             className = ''
-//             to = '/signup'>
-//             Выйти
-//         </NavLink>
-//         <NavLink to = '/task-manager'>
-//             К задачам
-//         </NavLink>
-//     </nav>
-// );
