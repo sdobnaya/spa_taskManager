@@ -46,12 +46,13 @@ export const api = Object.freeze({
     async createTodo(token, body) {
         const { data } = await axios.post(
             `${TODO_API_URL}/tasks`,
+            body,
             {
-                headers: {
+                headers:
+                {
                     authorization: `Bearer ${token}`,
                 },
             },
-            body,
         );
 
         return data;

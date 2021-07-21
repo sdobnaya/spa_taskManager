@@ -18,9 +18,9 @@ export const ActualTaskForm = () => {
     const Calendar = useCalendar();
     const creation = useCreate();
 
+
     const toCreate = form.handleSubmit(async (data) => {
         await creation.mutateAsync(data);
-        console.log('tuuuuuuuut');
 
         form.reset();
     });
