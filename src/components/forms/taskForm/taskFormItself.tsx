@@ -1,13 +1,16 @@
 // @ts-nocheck
+import { useState } from 'react';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ru from 'date-fns/locale/ru';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import classNames from 'classnames';
 import { schema } from './config';
 // hooks
-import { useCalendar } from '../../../hooks/useCalendar';
 import { useCreate } from '../../../hooks/useCreateTodo';
 
-import { chooseTag } from '../../../helpers/chooseTag';
+// import { chooseTag } from '../../../helpers/chooseTag';
+
+registerLocale('ru', ru);
 
 export const ActualTaskForm = () => {
     const form = useForm({
@@ -15,12 +18,18 @@ export const ActualTaskForm = () => {
         resolver: yupResolver(schema),
     });
 
-    const Calendar = useCalendar();
+    const [startDate, setStartDate] = useState(null);
+
+    const [selectedTag, setSelectedTag] = useState('8b535acc-623b-4ee3-9279-e6175159ff47');
+
     const creation = useCreate();
 
-
     const toCreate = form.handleSubmit(async (data) => {
-        await creation.mutateAsync(data);
+        await creation.mutateAsync({
+            ...data,
+            deadline: startDate,
+            tag:  selectedTag,
+        });
 
         form.reset();
     });
@@ -44,7 +53,14 @@ export const ActualTaskForm = () => {
                     <div className = 'deadline'>
                         <span className = 'label'>Дедлайн</span>
                         <span className = 'date' >
-                            { Calendar }
+                            <DatePicker
+                                selected = { startDate }
+                                onChange = { (date) => setStartDate(date) }
+                                minDate = { new Date() }
+                                locale = { ru }
+                                placeholderText = 'Выберите дату'
+                                dateFormat = 'dd/MM/yyyy'
+                                showDisabledMonthNavigation/>
                         </span>
                     </div>
                     <div className = 'description'>
@@ -58,24 +74,29 @@ export const ActualTaskForm = () => {
                     </div>
                     <div className = 'tags'>
                         <span
-                            onClick = { chooseTag }
+                            onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(255, 171, 43)', backgroundColor: 'rgb(255, 250, 240)' } }
+                            id = '8b535acc-623b-4ee3-9279-e6175159ff47'
                             className = 'tag' >Sketch</span>
                         <span
-                            onClick = { chooseTag }
+                            onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(109, 210, 48)', backgroundColor: 'rgb(245, 253, 240)' } }
+                            id = 'e04358c2-4afc-4577-8ff6-9e8ddd4f406a'
                             className = 'tag' >Spotify</span>
                         <span
-                            onClick = { chooseTag }
+                            onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(254, 77, 151)', backgroundColor: 'rgb(255, 244, 249)' } }
+                            id = 'dd63b60d-864b-400e-b03b-f5eb6d8ffa93'
                             className = 'tag' >Dribble</span>
                         <span
-                            onClick = { chooseTag }
+                            onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(77, 124, 254)', backgroundColor: 'rgb(240, 243, 251)' } }
+                            id = '482a32f9-2b33-4d3f-af65-bb2f886d3ee9'
                             className = 'tag' >Behance</span>
                         <span
-                            onClick = { chooseTag }
+                            onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(134, 134, 134)', backgroundColor: 'rgb(236, 236, 236)' } }
+                            id = '3a423b8a-d946-4c0b-8195-33f320bd5470'
                             className = 'tag' >UX</span>
                     </div>
                     <div className = 'errors'>
