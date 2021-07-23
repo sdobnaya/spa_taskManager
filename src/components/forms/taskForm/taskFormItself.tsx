@@ -8,7 +8,6 @@ import { schema } from './config';
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
 
-// import { chooseTag } from '../../../helpers/chooseTag';
 
 registerLocale('ru', ru);
 
