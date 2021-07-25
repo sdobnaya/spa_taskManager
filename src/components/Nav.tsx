@@ -12,12 +12,10 @@ export const Nav = () => {
     const logoutActions = () => {
         useLogout();
         userState.toggle(userState.loggedIn);
-        console.log('logoutActions', userState.loggedIn);
     };
 
     return (
         <nav>
-            { console.log('nav', userState.loggedIn) }
             { userState.loggedIn
                 ? <> <NavLink
                     onClick = { logoutActions }

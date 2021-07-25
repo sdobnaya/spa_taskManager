@@ -18,7 +18,5 @@ export const useAllTasks = (token) => {
         },
     );
 
-    console.log('mutation- useAllTasks', mutation);
-
     return mutation;
 };
