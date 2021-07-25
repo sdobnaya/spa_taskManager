@@ -19,6 +19,15 @@ export const userTask = (state = [], action) => {
     }
 };
 
+export const allUserTasks = (state = [], action) => {
+    switch (action.type) {
+        case types.SET_PREVIOUS_TASKS:
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+};
+
 // const initialState = {
 //     sunny: '',
 //     cloudly: '',

@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Core
 import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,6 +18,7 @@ import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
 // Other
 import { UserContext } from '../../../context/userContext';
 import { schema } from './config';
+import { setAllTask } from '../../../lib/redux/init/actions';
 
 
 export const ActualLoginForm = () => {
@@ -27,6 +29,7 @@ export const ActualLoginForm = () => {
     const allTasks = useAllTasks(token);
 
     const userState = useContext(UserContext);
+    const dispatch = useDispatch();
 
     const form = useForm({
         mode:     'onTouched',
@@ -42,6 +45,8 @@ export const ActualLoginForm = () => {
         console.log('это', result.data.data);// все задачи с сервера
 
         authorization;
+
+        dispatch(setAllTask(result.data.data));
 
         form.reset();
     });
