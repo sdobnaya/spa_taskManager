@@ -2,8 +2,11 @@
 import { combineReducers } from 'redux';
 
 // Reducers
-
+import { userToken } from './reducers';
+import { userTask } from './reducers';
 
 export const rootReducer = combineReducers({
-    tmp: () => ({}),
+    userToken,
+    userTasks: userTask,
 });
+

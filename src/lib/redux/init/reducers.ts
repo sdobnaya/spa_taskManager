@@ -3,10 +3,19 @@ import { types } from './actionTypes';
 
 export const userToken = (state = null, action) => {
     switch (action.type) {
-    case types.SET_CURRENT_USER_TOKEN:
-        return action.payload;
-    default:
-        return state;
+        case types.SET_CURRENT_USER_TOKEN:
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
+export const userTask = (state = [], action) => {
+    switch (action.type) {
+        case types.SET_NEW_TASK:
+            return [...state, action.payload];
+        default:
+            return state;
     }
 };
 

@@ -1,10 +1,14 @@
 // @ts-nocheck
 import { useState } from 'react';
+
+import { useDispatch } from 'react-redux';
+
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
+import { setNewTask } from '../../../lib/redux/init/actions';
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
 
@@ -17,9 +21,11 @@ export const ActualTaskForm = () => {
         resolver: yupResolver(schema),
     });
 
+    const dispatch = useDispatch();
+
     const [startDate, setStartDate] = useState(null);
 
-    const [selectedTag, setSelectedTag] = useState('8b535acc-623b-4ee3-9279-e6175159ff47');
+    const [selectedTag, setSelectedTag] = useState(' ');
 
     const creation = useCreate();
 
@@ -29,6 +35,12 @@ export const ActualTaskForm = () => {
             deadline: startDate,
             tag:  selectedTag,
         });
+
+        dispatch(setNewTask({
+            ...data,
+            deadline: startDate,
+            tag:  selectedTag,
+        }));
 
         form.reset();
     });

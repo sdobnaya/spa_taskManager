@@ -6,3 +6,8 @@ export const setUserToken = (payload) => ({
     payload,
 });
 
+export const setNewTask = (payload) => ({
+    type: types.SET_NEW_TASK,
+    payload,
+});
+
