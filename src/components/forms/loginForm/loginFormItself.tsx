@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+// import { useDispatch } from 'react-redux'; +++
+
 import { setUserToken } from '../../../lib/redux/init/actions';
 
 
@@ -13,7 +13,7 @@ import { Input } from '../elements/input';
 import { UserContext } from '../../../context/userContext';
 
 import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
-// import { useAutoAuthorization } from '../../../hooks/useAutoAuthorization'; ---
+import { useAutoAuthorization } from '../../../hooks/useAutoAuthorization';
 import { useAllTasks } from '../../../hooks/useAllTasks';
 
 import { schema } from './config';
@@ -21,8 +21,7 @@ import { useLogin } from '../../../hooks/useLogin';
 
 export const ActualLoginForm = () => {
     //
-    // const navigate = useNavigate();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch(); +++
     const token = getFromLocalStorage('token');
     //
     const login = useLogin();
@@ -31,6 +30,9 @@ export const ActualLoginForm = () => {
     //
     const allTasks = useAllTasks(token);
     //
+
+    //--
+    const autho = useAutoAuthorization();
 
     const form = useForm({
         mode:     'onTouched',
@@ -41,13 +43,12 @@ export const ActualLoginForm = () => {
         userState.toggle(userState.loggedIn);
         await login.mutateAsync(data);
 
-        console.log('зашли', allTasks.data);
         const result = await allTasks.mutateAsync(token);
         console.log('это', result.data.data);
 
-        // useAutoAuthorization(); ---
+        autho;
 
-        dispatch(setUserToken(token)); // token === null ? navigate('/login') : +++
+        // dispatch(setUserToken(token)); // token === null ? navigate('/login') : +++
 
         form.reset();
     });
