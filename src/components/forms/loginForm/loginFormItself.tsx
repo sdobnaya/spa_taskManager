@@ -14,6 +14,7 @@ import { UserContext } from '../../../context/userContext';
 
 import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
 // import { useAutoAuthorization } from '../../../hooks/useAutoAuthorization'; ---
+import { useAllTasks } from '../../../hooks/useAllTasks';
 
 import { schema } from './config';
 import { useLogin } from '../../../hooks/useLogin';
@@ -22,9 +23,14 @@ export const ActualLoginForm = () => {
     //
     // const navigate = useNavigate();
     const dispatch = useDispatch();
+    const token = getFromLocalStorage('token');
     //
     const login = useLogin();
     const userState = useContext(UserContext);
+
+    //
+    const allTasks = useAllTasks(token);
+    //
 
     const form = useForm({
         mode:     'onTouched',
@@ -33,11 +39,16 @@ export const ActualLoginForm = () => {
 
     const logIn = form.handleSubmit(async (data) => {
         userState.toggle(userState.loggedIn);
-
         await login.mutateAsync(data);
+
+        console.log('зашли', allTasks.data);
+        const result = await allTasks.mutateAsync(token);
+        console.log('это', result.data.data);
+
         // useAutoAuthorization(); ---
-        const token = getFromLocalStorage('token');
+
         dispatch(setUserToken(token)); // token === null ? navigate('/login') : +++
+
         form.reset();
     });
 
