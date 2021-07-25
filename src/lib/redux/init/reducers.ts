@@ -10,18 +10,11 @@ export const userToken = (state = null, action) => {
     }
 };
 
-export const userTask = (state = [], action) => {
-    switch (action.type) {
-        case types.SET_NEW_TASK:
-            return [...state, action.payload];
-        default:
-            return state;
-    }
-};
-
-export const allUserTasks = (state = [], action) => {
+export const allUserTasks = (state = null, action) => {
     switch (action.type) {
         case types.SET_PREVIOUS_TASKS:
+            return action.payload;
+        case types.SET_NEW_TASK:
             return [...state, action.payload];
         default:
             return state;
@@ -50,5 +43,14 @@ export const allUserTasks = (state = [], action) => {
 //         return action.payload;
 //     default:
 //         return state;
+//     }
+// };
+
+// export const userTask = (state = [], action) => {
+//     switch (action.type) {
+//         case types.SET_NEW_TASK:
+//             return [...state, action.payload];
+//         default:
+//             return state;
 //     }
 // };
