@@ -23,8 +23,8 @@ export const TaskPage: FC = () => {
             <main>
                 <Controls />
                 <div className = 'wrap' >
-                    { /* { list === null ? <EmptyList /> : <TasksList/> } */ }
-                    <EmptyList />
+                    { list === [] ? <EmptyList /> : <TasksList/> }
+                    { /* <EmptyList /> */ }
                     { state.isVisible === true ? <ActualTaskForm /> : null }
                 </div>
             </main>
