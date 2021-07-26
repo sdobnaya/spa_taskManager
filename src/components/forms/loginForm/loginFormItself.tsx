@@ -38,15 +38,15 @@ export const ActualLoginForm = () => {
 
     const logIn = form.handleSubmit(async (data) => {
         userState.toggle(userState.loggedIn);
-        await login.mutateAsync(data);
+        const token = await login.mutateAsync(data);
 
-        const result = await allTasks.mutateAsync(token);
+        const tasks = await allTasks.mutateAsync(token);
 
-        console.log('это', result.data.data);// все задачи с сервера
+        console.log('это', tasks.data.data, authorization);// все задачи с сервера
 
         authorization;
 
-        dispatch(setAllTask(result.data.data));
+        dispatch(setAllTask(tasks.data.data));
 
         form.reset();
     });

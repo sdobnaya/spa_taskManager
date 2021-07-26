@@ -117,7 +117,7 @@ export const api = Object.freeze({
 
         setInLocalStorage(data.data);
 
-        return data;
+        return data.data;
     },
 });
 

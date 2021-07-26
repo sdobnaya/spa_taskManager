@@ -10,7 +10,7 @@ export const userToken = (state = null, action) => {
     }
 };
 
-export const allUserTasks = (state = null, action) => {
+export const allUserTasks = (state = [], action) => {
     switch (action.type) {
         case types.SET_PREVIOUS_TASKS:
             return action.payload;

@@ -9,7 +9,7 @@ export const useLogout = () => {
     const dispatch = useDispatch();
 
     localStorage.removeItem('token');
-    dispatch(setUserToken(' '));
+    dispatch(setUserToken(''));
 
     return api.logout(token);
 };
