@@ -29,6 +29,20 @@ export const ActualTaskForm = () => {
 
     const creation = useCreate();
 
+    //
+
+    let finalTagInfo;
+
+    if (selectedTag === '8b535acc-623b-4ee3-9279-e6175159ff47') {
+        finalTagInfo = {
+            id: '8b535acc-623b-4ee3-9279-e6175159ff47',
+            name: 'Sketch',
+            color: '#ffab2b',
+            bg: '#fffaf0',
+        };
+    }
+    //
+
     const toCreate = form.handleSubmit(async (data) => {
         await creation.mutateAsync({
             ...data,
@@ -39,7 +53,7 @@ export const ActualTaskForm = () => {
         dispatch(setNewTask({
             ...data,
             deadline: startDate,
-            tag:  selectedTag,
+            tag: finalTagInfo,
         }));
 
         form.reset();
