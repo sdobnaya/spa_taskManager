@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
@@ -27,33 +28,24 @@ export const ActualTaskForm = () => {
 
     const [selectedTag, setSelectedTag] = useState(' ');
 
+    const tags = useSelector((state) => { return state.allTags; });
+
     const creation = useCreate();
 
     //
-
-    let finalTagInfo;
-
-    if (selectedTag === '8b535acc-623b-4ee3-9279-e6175159ff47') {
-        finalTagInfo = {
-            id: '8b535acc-623b-4ee3-9279-e6175159ff47',
-            name: 'Sketch',
-            color: '#ffab2b',
-            bg: '#fffaf0',
-        };
-    }
     //
 
     const toCreate = form.handleSubmit(async (data) => {
         await creation.mutateAsync({
             ...data,
             deadline: startDate,
-            tag:  selectedTag,
+            tag: selectedTag,
         });
 
         dispatch(setNewTask({
             ...data,
             deadline: startDate,
-            tag: finalTagInfo,
+            tag: selectedTag,
         }));
 
         form.reset();
@@ -98,7 +90,15 @@ export const ActualTaskForm = () => {
                         </label>
                     </div>
                     <div className = 'tags'>
-                        <span
+                        { tags?.map((tag) => <span
+                            className = 'tag'
+                            key = { tag.id }
+                            id = { tag.id }
+                            style = { { color: tag.color, backgroundColor: tag.bg } }
+                            onClick = { (event) => { setSelectedTag(event.target.id); } } >
+                            { tag.name }
+                        </span>) }
+                        { /* <span
                             onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(255, 171, 43)', backgroundColor: 'rgb(255, 250, 240)' } }
                             id = '8b535acc-623b-4ee3-9279-e6175159ff47'
@@ -122,7 +122,7 @@ export const ActualTaskForm = () => {
                             onClick = { (event) => { setSelectedTag(event.target.id); } }
                             style = { { color: 'rgb(134, 134, 134)', backgroundColor: 'rgb(236, 236, 236)' } }
                             id = '3a423b8a-d946-4c0b-8195-33f320bd5470'
-                            className = 'tag' >UX</span>
+                            className = 'tag' >UX</span> */ }
                     </div>
                     <div className = 'errors'>
                         <p className = 'errorMessage'>{ form.formState.errors?.title?.message }</p>

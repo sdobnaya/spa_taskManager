@@ -21,6 +21,15 @@ export const allUserTasks = (state = [], action) => {
     }
 };
 
+export const allTags = (state = null, action) => {
+    switch (action.type) {
+        case types.SET_TAGS:
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 // const initialState = {
 //     sunny: '',
 //     cloudly: '',

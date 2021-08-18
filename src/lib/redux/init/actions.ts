@@ -15,3 +15,8 @@ export const setAllTask = (payload) => ({
     type: types.SET_PREVIOUS_TASKS,
     payload,
 });
+
+export const setTags = (payload) => ({
+    type: types.SET_TAGS,
+    payload,
+});

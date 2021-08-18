@@ -104,6 +104,12 @@ export const api = Object.freeze({
 
         return data;
     },
+    async getTags() {
+        const data = await axios.get(`${TODO_API_URL}/tags`);
+        console.log('apiii', data.data);
+
+        return data.data;
+    },
     async login(credentials) {
         const { email, password } = credentials;
         const { data } = await axios.get(

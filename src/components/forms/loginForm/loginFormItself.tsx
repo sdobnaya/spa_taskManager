@@ -13,6 +13,8 @@ import { Input } from '../elements/input';
 import { useAutoAuthorization } from '../../../hooks/useAutoAuthorization';
 import { useAllTasks } from '../../../hooks/useAllTasks';
 import { useLogin } from '../../../hooks/useLogin';
+import { useGetTags } from '../../../hooks/useGetTags'; // djn
+
 import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
 
 // Other
@@ -21,12 +23,16 @@ import { schema } from './config';
 import { setAllTask } from '../../../lib/redux/init/actions';
 
 
+// useGetTags();
+
+
 export const ActualLoginForm = () => {
     const token = getFromLocalStorage('token');
 
     const authorization = useAutoAuthorization();
     const login = useLogin();
     const allTasks = useAllTasks(token);
+    useGetTags();
 
     const userState = useContext(UserContext);
     const dispatch = useDispatch();

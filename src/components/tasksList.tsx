@@ -21,7 +21,7 @@ export const TasksList = () => {
                                 <span className  = 'deadline'>{ new Date(task.deadline).toLocaleDateString('ru-RU', options) }</span>
                                 <span
                                     className  = 'tag'
-                                    style = { { color: `${task.tag.color}`, backgroundColor: `${task.tag.bg}` } }>{ task.tag.name }</span>
+                                    style = { { color: `${task.tag?.color}`, backgroundColor: `${task.tag?.bg}` } }>{ task.tag?.name }</span>
                             </div>
                         </div>
                     );

@@ -8,10 +8,12 @@ import { schema } from './config';
 import { useSignup } from '../../../hooks/useSignup';
 import { Input } from '../elements/input';
 import { UserContext } from '../../../context/userContext';
+import { useGetTags } from '../../../hooks/useGetTags';
 
 export const ActualSignupForm = () => {
     const signup = useSignup();
     const userState = useContext(UserContext);
+    useGetTags();
 
     const form = useForm({
         mode:     'onTouched',
