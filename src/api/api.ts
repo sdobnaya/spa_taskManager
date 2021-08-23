@@ -41,7 +41,7 @@ export const api = Object.freeze({
             },
         );
 
-        return data;
+        return data.data;
     },
     async createTodo(token, body) {
         const { data } = await axios.post(

@@ -51,6 +51,7 @@ export const ActualTaskForm = () => {
         form.reset();
     });
 
+    // document.querySelectorAll('.button-remove-task').addEventListener('click', (sele))
     return (
         <div className = 'task-card'>
             <form>

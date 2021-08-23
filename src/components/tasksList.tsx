@@ -1,11 +1,21 @@
 // @ts-nocheck
 /* Core */
 import { useSelector } from 'react-redux';
+import { getTodoById } from '../helpers/getTodoById';
 
 export const TasksList = () => {
     const list = useSelector((state) => { return state.allUserTasks; });
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    const taskList = document.querySelectorAll('.task');
+    taskList.forEach((task) => task.addEventListener('click', (event) => {
+        const task = event.target;
+        console.log('id', task);
+        console.log('id', task.id);
+        const result = getTodoById(event.target.id);
+        console.log('taskList', result);
+    }));
 
     return (
         <div className = 'list'>
