@@ -13,7 +13,7 @@ export const TasksList = () => {
                 { list?.map((task) => {
                     return (
                         <div
-                            key = { task.id }
+                            key = { task.id + new Date(task.deadline) }
                             id = { task.id }
                             className = 'task'>
                             <span className = 'title'>{ task.title }</span>
@@ -30,3 +30,4 @@ export const TasksList = () => {
         </div>
     );
 };
+
