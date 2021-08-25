@@ -20,3 +20,8 @@ export const setTags = (payload) => ({
     type: types.SET_TAGS,
     payload,
 });
+
+export const setTaskInForm = (payload) => ({
+    type: types.SET_TASK_IN_FORM,
+    payload,
+});

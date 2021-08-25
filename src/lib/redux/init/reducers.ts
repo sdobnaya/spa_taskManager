@@ -30,36 +30,11 @@ export const allTags = (state = null, action) => {
     }
 };
 
-// const initialState = {
-//     sunny: '',
-//     cloudly: '',
-//     'min-temperature': '',
-//     'max-temperature': '',
-// };
-
-// export const pushInitData = (state = [], action) => {
-//     switch (action.type) {
-//     case types.SET_INIT_STATE:
-//         return [...state, action.payload];
-//     default:
-//         return state;
-//     }
-// };
-
-// export const currentFilter = (state = initialState, action) => {
-//     switch (action.type) {
-//     case types.GET_CURRENT_FILTER:
-//         return action.payload;
-//     default:
-//         return state;
-//     }
-// };
-
-// export const userTask = (state = [], action) => {
-//     switch (action.type) {
-//         case types.SET_NEW_TASK:
-//             return [...state, action.payload];
-//         default:
-//             return state;
-//     }
-// };
+export const setTaskInForm = (state = null, action) => {
+    switch (action.type) {
+        case types.SET_TASK_IN_FORM:
+            return action.payload;
+        default:
+            return state;
+    }
+};

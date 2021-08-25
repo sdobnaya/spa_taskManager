@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { getFromLocalStorage } from './getFromLocalStorage';
+import { getFromLocalStorage } from '../helpers/getFromLocalStorage';
 import { api } from '../api';
 
 export const getTodoById = async (tagId) => {

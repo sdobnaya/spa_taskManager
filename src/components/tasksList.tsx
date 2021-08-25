@@ -1,18 +1,26 @@
 // @ts-nocheck
 /* Core */
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getTodoById } from '../helpers/getTodoById';
+import { setTaskInForm } from '../lib/redux/init/actions';
+import { getTodoById } from '../hooks/useTodoById';
 
 export const TasksList = () => {
+    const dispatch = useDispatch();
+
     const list = useSelector((state) => { return state.allUserTasks; });
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
+    let chosenTask;
+
     useEffect(() => {
         const taskList = document.querySelectorAll('.task');
-        taskList.forEach((task) => task.addEventListener('click', (event) => {
-            getTodoById(event.target.id);
+        taskList.forEach((task) => task.addEventListener('click', async (event) => {
+            chosenTask = await getTodoById(event.target.id);
+            console.log('tasklist', chosenTask);
+            dispatch(setTaskInForm(chosenTask));
         }));
     }, [list]);
 

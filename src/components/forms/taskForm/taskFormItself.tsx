@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -33,11 +34,34 @@ export const ActualTaskForm = () => {
     const [selectedTag, setSelectedTag] = useState(' ');
 
     const tags = useSelector((state) => { return state.allTags; });
+    const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
+    console.log('tipi', typeof chosenTodo);
 
     const creation = useCreate();
 
     const token = getFromLocalStorage('token');
     const allTasks = useAllTasks(token);
+
+    useEffect(() => {
+        if (chosenTodo !== null) { // || typeof chosenTodo !== null // typeof chosenTodo === 'object' //typeof chosenTodo !== 'null'
+            // console.log('tut', chosenTodo); //
+            // console.log('tut', chosenTodo.title); //
+            // Инпут название
+            const title = document.getElementById('form-title');
+            // console.log('aaa', title); //
+            title.value = chosenTodo.title;
+            // Инпут описание
+            const description = document.getElementById('description');
+            // console.log('aaa', description); //
+            description.value = chosenTodo.description;
+            // // Инпут дата
+            // const deadline = document.getElementById('deadline');
+            // console.log('aaa', deadline); //
+            // deadline.value = chosenTodo.deadline;
+            // // Инпут тэг
+        }
+    }, [chosenTodo]);
+
 
     const toCreate = form.handleSubmit(async (data) => {
         await creation.mutateAsync({
@@ -77,6 +101,7 @@ export const ActualTaskForm = () => {
                         Задача
                         <input
                             { ...form.register('title') }
+                            id = 'form-title'
                             className = 'title'
                             placeholder = 'Пройти интенсив по React + Redux'
                             type = 'text' />
@@ -99,6 +124,7 @@ export const ActualTaskForm = () => {
                             Описание
                             <input
                                 { ...form.register('description') }
+                                id = 'description'
                                 className = 'text'
                                 placeholder = 'Изучить все технологии в сочетании со специальными библиотеками' />
                         </label>
