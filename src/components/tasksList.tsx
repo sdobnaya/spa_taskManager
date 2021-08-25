@@ -12,11 +12,7 @@ export const TasksList = () => {
     useEffect(() => {
         const taskList = document.querySelectorAll('.task');
         taskList.forEach((task) => task.addEventListener('click', (event) => {
-            const task = event.target;
-            console.log('id', task);
-
-            const result = getTodoById(event.target.id);
-            console.log('taskList', result);
+            getTodoById(event.target.id);
         }));
     }, [list]);
 

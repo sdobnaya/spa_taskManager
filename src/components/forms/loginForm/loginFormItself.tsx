@@ -48,8 +48,6 @@ export const ActualLoginForm = () => {
 
         const tasks = await allTasks.mutateAsync(token);
 
-        console.log('это', tasks.data.data, authorization);// все задачи с сервера
-
         authorization;
 
         dispatch(setAllTask(tasks.data.data));

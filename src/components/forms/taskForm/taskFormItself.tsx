@@ -10,10 +10,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
 import { setNewTask } from '../../../lib/redux/init/actions';
+import { setAllTask } from '../../../lib/redux/init/actions';
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
+import { useAllTasks } from '../../../hooks/useAllTasks';
 // helpers
 import { getTagInfo } from '../../../helpers/getTagInfo';
+import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
 
 registerLocale('ru', ru);
 
@@ -33,6 +36,9 @@ export const ActualTaskForm = () => {
 
     const creation = useCreate();
 
+    const token = getFromLocalStorage('token');
+    const allTasks = useAllTasks(token);
+
     const toCreate = form.handleSubmit(async (data) => {
         await creation.mutateAsync({
             ...data,
@@ -47,6 +53,13 @@ export const ActualTaskForm = () => {
             deadline: startDate,
             tag: result,
         }));
+
+        //
+
+        const tasks = await allTasks.mutateAsync(token);
+        dispatch(setAllTask(null));
+        dispatch(setAllTask(tasks.data.data));
+        //
 
         form.reset();
     });

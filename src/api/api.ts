@@ -106,7 +106,6 @@ export const api = Object.freeze({
     },
     async getTags() {
         const data = await axios.get(`${TODO_API_URL}/tags`);
-        console.log('apiii', data.data);
 
         return data.data;
     },
