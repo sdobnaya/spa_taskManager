@@ -41,24 +41,32 @@ export const ActualTaskForm = () => {
 
     const token = getFromLocalStorage('token');
     const allTasks = useAllTasks(token);
+    let theTtag;
 
     useEffect(() => {
-        if (chosenTodo !== null) { // || typeof chosenTodo !== null // typeof chosenTodo === 'object' //typeof chosenTodo !== 'null'
-            // console.log('tut', chosenTodo); //
-            // console.log('tut', chosenTodo.title); //
+        if (chosenTodo !== null) {
             // Инпут название
             const title = document.getElementById('form-title');
-            // console.log('aaa', title); //
             title.value = chosenTodo.title;
             // Инпут описание
             const description = document.getElementById('description');
-            // console.log('aaa', description); //
             description.value = chosenTodo.description;
             // // Инпут дата
-            // const deadline = document.getElementById('deadline');
-            // console.log('aaa', deadline); //
-            // deadline.value = chosenTodo.deadline;
+            const deadline = document.getElementById('deadline');
+            const options = {
+                locale: 'ru',
+                dateFormat: 'dd/MM/yyyy',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            };
+            console.log('date', new Date(chosenTodo.deadline).toLocaleString('ru', options));
+            deadline.value = new Date(chosenTodo.deadline).toLocaleString('ru', options);
             // // Инпут тэг
+            console.log('chosenTodo.tag.id_1', chosenTodo.tag.id);
+            console.log('selectedTag_2', selectedTag);
+            setSelectedTag(chosenTodo.tag.id);
+            console.log(3, selectedTag);
         }
     }, [chosenTodo]);
 
@@ -110,6 +118,7 @@ export const ActualTaskForm = () => {
                         <span className = 'label'>Дедлайн</span>
                         <span className = 'date' >
                             <DatePicker
+                                id = 'deadline'
                                 selected = { startDate }
                                 onChange = { (date) => setStartDate(date) }
                                 minDate = { new Date() }
