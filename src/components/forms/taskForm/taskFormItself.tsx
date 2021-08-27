@@ -1,6 +1,8 @@
 // @ts-nocheck
+// @ts-nocheck
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { createRef } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -35,16 +37,16 @@ export const ActualTaskForm = () => {
 
     const tags = useSelector((state) => { return state.allTags; });
     const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
-    console.log('tipi', typeof chosenTodo);
+    console.log('obj', chosenTodo);
 
     const creation = useCreate();
 
     const token = getFromLocalStorage('token');
     const allTasks = useAllTasks(token);
-    let theTtag;
 
     useEffect(() => {
         if (chosenTodo !== null) {
+            // console.log('obj2', chosenTodo);
             // Инпут название
             const title = document.getElementById('form-title');
             title.value = chosenTodo.title;
@@ -63,10 +65,19 @@ export const ActualTaskForm = () => {
             console.log('date', new Date(chosenTodo.deadline).toLocaleString('ru', options));
             deadline.value = new Date(chosenTodo.deadline).toLocaleString('ru', options);
             // // Инпут тэг
-            console.log('chosenTodo.tag.id_1', chosenTodo.tag.id);
-            console.log('selectedTag_2', selectedTag);
-            setSelectedTag(chosenTodo.tag.id);
-            console.log(3, selectedTag);
+            // console.log('chosenTodo.tag.id', chosenTodo.tag.id);
+            // console.log('selectedTag', selectedTag);
+            // setSelectedTag(chosenTodo.tag.id);
+            // console.log('selectedTag2', selectedTag);
+
+
+            // console.log(4, selectedTag);
+            // setTagValue(chosenTodo.tag.id);
+
+            // console.log('chosenTodo.tag.id_1', chosenTodo.tag.id);
+            // console.log('selectedTag_2', selectedTag);
+            // () => { setSelectedTag(chosenTodo.tag.id); };
+            // console.log(3, selectedTag);
         }
     }, [chosenTodo]);
 
@@ -110,6 +121,7 @@ export const ActualTaskForm = () => {
                         <input
                             { ...form.register('title') }
                             id = 'form-title'
+                            // ref = { formTitleRef }
                             className = 'title'
                             placeholder = 'Пройти интенсив по React + Redux'
                             type = 'text' />

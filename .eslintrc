@@ -266,7 +266,7 @@
     ],
     "no-restricted-properties": "error",
     "no-return-assign": [
-      "error",
+      "warn",
       "except-parens"
     ],
     "no-return-await": "error",
