@@ -113,14 +113,7 @@ export const ActualTaskForm = () => {
         form.reset();
     });
 
-    const toDelete = form.handleSubmit(async () => {
-        //
-        // () => form.clearErrors();
-        // form.clearErrors(); // ['title', 'description']
-        // form.register('title', { required: false });
-        // form.register('form.title', { required: true });
-        // form.clearErrors('title'); // ['title', 'description']
-        //
+    const toDelete = async () => {
         await deletion.mutateAsync(theId);
 
         form.reset();
@@ -128,9 +121,8 @@ export const ActualTaskForm = () => {
         const tasks = await allTasks.mutateAsync(token);
         dispatch(setAllTask(null));
         dispatch(setAllTask(tasks.data.data));
-    });
+    };
 
-    // document.querySelectorAll('.button-remove-task').addEventListener('click', (sele))
     return (
         <div className = 'task-card'>
             <form>
