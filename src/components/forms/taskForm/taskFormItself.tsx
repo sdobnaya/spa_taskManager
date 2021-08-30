@@ -17,6 +17,7 @@ import { setAllTask } from '../../../lib/redux/init/actions';
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
 import { useAllTasks } from '../../../hooks/useAllTasks';
+import { useDeleteTodo } from '../../../hooks/useDeleteTodo';
 // helpers
 import { getTagInfo } from '../../../helpers/getTagInfo';
 import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
@@ -29,6 +30,8 @@ export const ActualTaskForm = () => {
         resolver: yupResolver(schema),
     });
 
+    // form.clearErrors();
+
     const dispatch = useDispatch();
 
     const [startDate, setStartDate] = useState(null);
@@ -37,15 +40,18 @@ export const ActualTaskForm = () => {
 
     const tags = useSelector((state) => { return state.allTags; });
     const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
+    let theId = chosenTodo?.id;
     console.log('obj', chosenTodo);
 
     const creation = useCreate();
+    const deletion = useDeleteTodo();
 
     const token = getFromLocalStorage('token');
     const allTasks = useAllTasks(token);
 
     useEffect(() => {
         if (chosenTodo !== null) {
+            theId = chosenTodo.id;
             // console.log('obj2', chosenTodo);
             // Инпут название
             const title = document.getElementById('form-title');
@@ -107,13 +113,30 @@ export const ActualTaskForm = () => {
         form.reset();
     });
 
+    const toDelete = form.handleSubmit(async () => {
+        //
+        // () => form.clearErrors();
+        // form.clearErrors(); // ['title', 'description']
+        // form.register('title', { required: false });
+        // form.register('form.title', { required: true });
+        // form.clearErrors('title'); // ['title', 'description']
+        //
+        await deletion.mutateAsync(theId);
+
+        form.reset();
+
+        const tasks = await allTasks.mutateAsync(token);
+        dispatch(setAllTask(null));
+        dispatch(setAllTask(tasks.data.data));
+    });
+
     // document.querySelectorAll('.button-remove-task').addEventListener('click', (sele))
     return (
         <div className = 'task-card'>
             <form>
                 <div className = 'head'>
                     <button className = 'button-complete-task'>Завершить</button>
-                    <div className = 'button-remove-task'></div>
+                    <div onClick = { toDelete } className = 'button-remove-task'></div>
                 </div>
                 <div className = 'content'>
                     <label className = 'label'>
@@ -121,6 +144,7 @@ export const ActualTaskForm = () => {
                         <input
                             { ...form.register('title') }
                             id = 'form-title'
+                            name = 'title'
                             // ref = { formTitleRef }
                             className = 'title'
                             placeholder = 'Пройти интенсив по React + Redux'
@@ -145,6 +169,7 @@ export const ActualTaskForm = () => {
                             Описание
                             <input
                                 { ...form.register('description') }
+                                name = 'description'
                                 id = 'description'
                                 className = 'text'
                                 placeholder = 'Изучить все технологии в сочетании со специальными библиотеками' />
