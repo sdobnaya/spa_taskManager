@@ -14,7 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
 import { setNewTask } from '../../../lib/redux/init/actions';
 import { setAllTask } from '../../../lib/redux/init/actions';
-// import { setTaskInForm } from '../../../lib/redux/init/actions';
+import { setTaskInForm } from '../../../lib/redux/init/actions';
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
 import { useAllTasks } from '../../../hooks/useAllTasks';
@@ -90,6 +90,7 @@ export const ActualTaskForm = () => {
         const tasks = await allTasks.mutateAsync(token);
         dispatch(setAllTask(null));
         dispatch(setAllTask(tasks.data.data));
+        dispatch(setTaskInForm(null));
 
         form.reset();
     });
@@ -100,6 +101,7 @@ export const ActualTaskForm = () => {
         const tasks = await allTasks.mutateAsync(token);
         dispatch(setAllTask(null));
         dispatch(setAllTask(tasks.data.data));
+        dispatch(setTaskInForm(null));
 
         form.reset();
     };
