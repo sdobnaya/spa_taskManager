@@ -3,12 +3,12 @@ import * as yup from 'yup';
 export const schema = yup.object().shape({
     title: yup
         .string()
-        .min(3, 'Укажите название задачи - больше трех символов')
-        .required('*'),
+        .min(3, 'Название задачи - больше трех символов')
+        .required('Поле названия задачи обязательно для заполнения'),
     description: yup
         .string()
-        .min(5, 'Поле с описанием задачи обязательно для заполнения')
-        .required('*'),
+        .min(5, 'Описание задачи - больше пяти символов')
+        .required('Поле описания задачи обязательно для заполнения'),
 });
 
 export const getTaskPlaceholder = () => {

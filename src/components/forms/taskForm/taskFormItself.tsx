@@ -30,18 +30,24 @@ export const ActualTaskForm = () => {
         resolver: yupResolver(schema),
     });
 
-    // form.clearErrors();
-
     const dispatch = useDispatch();
 
     const [startDate, setStartDate] = useState(null);
 
-    const [selectedTag, setSelectedTag] = useState(' ');
+    const [selectedTag, setSelectedTag] = useState(null);
+
+    //
+    const inputTitle = createRef();
+    const inputDescription = createRef();
+
+    let theDate;
+    let theTag;
+    //
 
     const tags = useSelector((state) => { return state.allTags; });
     const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
     let theId = chosenTodo?.id;
-    console.log('obj', chosenTodo);
+    console.log('curr obj', chosenTodo);
 
     const creation = useCreate();
     const deletion = useDeleteTodo();
@@ -52,38 +58,16 @@ export const ActualTaskForm = () => {
     useEffect(() => {
         if (chosenTodo !== null) {
             theId = chosenTodo.id;
-            // console.log('obj2', chosenTodo);
             // Инпут название
-            const title = document.getElementById('form-title');
-            title.value = chosenTodo.title;
+            inputTitle.current.value = chosenTodo.title;
             // Инпут описание
-            const description = document.getElementById('description');
-            description.value = chosenTodo.description;
-            // // Инпут дата
-            const deadline = document.getElementById('deadline');
-            const options = {
-                locale: 'ru',
-                dateFormat: 'dd/MM/yyyy',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            };
-            console.log('date', new Date(chosenTodo.deadline).toLocaleString('ru', options));
-            deadline.value = new Date(chosenTodo.deadline).toLocaleString('ru', options);
-            // // Инпут тэг
-            // console.log('chosenTodo.tag.id', chosenTodo.tag.id);
-            // console.log('selectedTag', selectedTag);
-            // setSelectedTag(chosenTodo.tag.id);
-            // console.log('selectedTag2', selectedTag);
-
-
-            // console.log(4, selectedTag);
-            // setTagValue(chosenTodo.tag.id);
-
-            // console.log('chosenTodo.tag.id_1', chosenTodo.tag.id);
-            // console.log('selectedTag_2', selectedTag);
-            // () => { setSelectedTag(chosenTodo.tag.id); };
-            // console.log(3, selectedTag);
+            inputDescription.current.value = chosenTodo.description;
+            // Инпут дата
+            theDate = new Date(chosenTodo.deadline);
+            setStartDate(theDate);
+            // Инпут тэг
+            theTag = chosenTodo.tag.id;
+            console.log('2 theTag', theTag);
         }
     }, [chosenTodo]);
 
@@ -103,12 +87,9 @@ export const ActualTaskForm = () => {
             tag: result,
         }));
 
-        //
-
         const tasks = await allTasks.mutateAsync(token);
         dispatch(setAllTask(null));
         dispatch(setAllTask(tasks.data.data));
-        //
 
         form.reset();
     });
@@ -137,7 +118,7 @@ export const ActualTaskForm = () => {
                             { ...form.register('title') }
                             id = 'form-title'
                             name = 'title'
-                            // ref = { formTitleRef }
+                            ref = { inputTitle }
                             className = 'title'
                             placeholder = 'Пройти интенсив по React + Redux'
                             type = 'text' />
@@ -146,13 +127,12 @@ export const ActualTaskForm = () => {
                         <span className = 'label'>Дедлайн</span>
                         <span className = 'date' >
                             <DatePicker
-                                id = 'deadline'
                                 selected = { startDate }
                                 onChange = { (date) => setStartDate(date) }
                                 minDate = { new Date() }
                                 locale = { ru }
                                 placeholderText = 'Выберите дату'
-                                dateFormat = 'dd/MM/yyyy'
+                                dateFormat = 'dd MMMM yyyy'
                                 showDisabledMonthNavigation/>
                         </span>
                     </div>
@@ -162,6 +142,7 @@ export const ActualTaskForm = () => {
                             <input
                                 { ...form.register('description') }
                                 name = 'description'
+                                ref = { inputDescription }
                                 id = 'description'
                                 className = 'text'
                                 placeholder = 'Изучить все технологии в сочетании со специальными библиотеками' />
@@ -180,6 +161,7 @@ export const ActualTaskForm = () => {
                     <div className = 'errors'>
                         <p className = 'errorMessage'>{ form.formState.errors?.title?.message }</p>
                         <p className = 'errorMessage'>{ form.formState.errors?.description?.message }</p>
+                        <p style = { { color: '#868686' }  } className = 'errorMessage'>Обязательно укажите название, время, описание и тег вашей задачи</p>
                     </div>
                     <div className = 'form-controls'>
                         <button className = 'button-reset-task' type = 'reset'>Reset</button>
