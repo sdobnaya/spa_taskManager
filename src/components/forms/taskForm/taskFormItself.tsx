@@ -14,6 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
 import { setNewTask } from '../../../lib/redux/init/actions';
 import { setAllTask } from '../../../lib/redux/init/actions';
+// import { setTaskInForm } from '../../../lib/redux/init/actions';
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
 import { useAllTasks } from '../../../hooks/useAllTasks';
@@ -39,7 +40,6 @@ export const ActualTaskForm = () => {
     //
     const inputTitle = createRef();
     const inputDescription = createRef();
-
     let theDate;
     let theTag;
     //
@@ -97,11 +97,11 @@ export const ActualTaskForm = () => {
     const toDelete = async () => {
         await deletion.mutateAsync(theId);
 
-        form.reset();
-
         const tasks = await allTasks.mutateAsync(token);
         dispatch(setAllTask(null));
         dispatch(setAllTask(tasks.data.data));
+
+        form.reset();
     };
 
     return (
@@ -127,9 +127,9 @@ export const ActualTaskForm = () => {
                         <span className = 'label'>Дедлайн</span>
                         <span className = 'date' >
                             <DatePicker
+                                minDate = { new Date() }
                                 selected = { startDate }
                                 onChange = { (date) => setStartDate(date) }
-                                minDate = { new Date() }
                                 locale = { ru }
                                 placeholderText = 'Выберите дату'
                                 dateFormat = 'dd MMMM yyyy'
@@ -169,6 +169,11 @@ export const ActualTaskForm = () => {
                             onClick = { toCreate }
                             className = 'button-save-task'
                             type = 'submit'>Save</button>
+                        { chosenTodo !== null ? <button
+                            onClick = { toCreate }
+                            className = 'button-save-task'
+                            type = 'submit'>Update</button>
+                            : null }
                     </div>
                 </div>
             </form>
