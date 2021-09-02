@@ -77,6 +77,7 @@ export const ActualTaskForm = () => {
             // Инпут тэг
             theTag = chosenTodo?.tag?.id;
             console.log('2 theTag', theTag);
+            state.setVisible(true);
         }
     }, [chosenTodo]);
 
@@ -182,7 +183,7 @@ export const ActualTaskForm = () => {
                         <button
                             onClick = { toCreate }
                             className = 'button-save-task'
-                            type = 'submit'>Save</button>
+                            type = 'submit'>Save new task</button>
                         { chosenTodo !== null ? <button
                             onClick = { toCreate }
                             className = 'button-save-task'

@@ -30,6 +30,7 @@ export const TasksList = () => {
             chosenTask = await getTodoById(event.target.id);
             console.log('tasklist', chosenTask);
             dispatch(setTaskInForm(chosenTask));
+            state.setVisible(true);
         }));
     }, [list]);
 
