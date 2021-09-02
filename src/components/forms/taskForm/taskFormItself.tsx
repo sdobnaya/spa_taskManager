@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { createRef } from 'react';
 
+//
+import { useContext } from 'react';
+//
+
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -15,6 +19,9 @@ import { schema } from './config';
 import { setNewTask } from '../../../lib/redux/init/actions';
 import { setAllTask } from '../../../lib/redux/init/actions';
 import { setTaskInForm } from '../../../lib/redux/init/actions';
+//
+import { TaskContext } from '../../../context/taskContext';
+//
 // hooks
 import { useCreate } from '../../../hooks/useCreateTodo';
 import { useAllTasks } from '../../../hooks/useAllTasks';
@@ -37,11 +44,13 @@ export const ActualTaskForm = () => {
 
     const [selectedTag, setSelectedTag] = useState(null);
 
-    //
     const inputTitle = createRef();
     const inputDescription = createRef();
     let theDate;
     let theTag;
+
+    //
+    const state = useContext(TaskContext);
     //
 
     const tags = useSelector((state) => { return state.allTags; });
@@ -59,14 +68,14 @@ export const ActualTaskForm = () => {
         if (chosenTodo !== null) {
             theId = chosenTodo.id;
             // Инпут название
-            inputTitle.current.value = chosenTodo.title;
+            inputTitle.current.value = chosenTodo?.title;
             // Инпут описание
-            inputDescription.current.value = chosenTodo.description;
+            inputDescription.current.value = chosenTodo?.description;
             // Инпут дата
-            theDate = new Date(chosenTodo.deadline);
+            theDate = new Date(chosenTodo?.deadline);
             setStartDate(theDate);
             // Инпут тэг
-            theTag = chosenTodo.tag.id;
+            theTag = chosenTodo?.tag?.id;
             console.log('2 theTag', theTag);
         }
     }, [chosenTodo]);
@@ -92,7 +101,8 @@ export const ActualTaskForm = () => {
         dispatch(setAllTask(tasks.data.data));
         dispatch(setTaskInForm(null));
 
-        form.reset();
+        state.toggle();
+        // form.reset();
     });
 
     const toDelete = async () => {
@@ -103,7 +113,9 @@ export const ActualTaskForm = () => {
         dispatch(setAllTask(tasks.data.data));
         dispatch(setTaskInForm(null));
 
-        form.reset();
+        state.toggle();
+
+        // form.reset();
     };
 
     return (
