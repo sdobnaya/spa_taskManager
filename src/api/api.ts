@@ -21,12 +21,12 @@ export const api = Object.freeze({
     async changeTodo(token, id, body) {
         const { data } = await axios.put(
             `${TODO_API_URL}/tasks/${id}`,
+            body,
             {
                 headers: {
                     authorization: `Bearer ${token}`,
                 },
             },
-            body,
         );
 
         return data;

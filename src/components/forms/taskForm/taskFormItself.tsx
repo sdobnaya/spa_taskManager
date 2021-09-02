@@ -26,6 +26,7 @@ import { TaskContext } from '../../../context/taskContext';
 import { useCreate } from '../../../hooks/useCreateTodo';
 import { useAllTasks } from '../../../hooks/useAllTasks';
 import { useDeleteTodo } from '../../../hooks/useDeleteTodo';
+import { useUpdateTodoById } from '../../../hooks/useUpdateTodo';
 // helpers
 import { getTagInfo } from '../../../helpers/getTagInfo';
 import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
@@ -60,6 +61,7 @@ export const ActualTaskForm = () => {
 
     const creation = useCreate();
     const deletion = useDeleteTodo();
+    const updating = useUpdateTodoById(theId);
 
     const token = getFromLocalStorage('token');
     const allTasks = useAllTasks(token);
@@ -103,7 +105,28 @@ export const ActualTaskForm = () => {
         dispatch(setTaskInForm(null));
 
         state.toggle();
-        // form.reset();
+    });
+
+    const toUpdate = form.handleSubmit(async (data) => {
+        console.log('toUpdate', data);
+        await updating.mutateAsync({
+            ...data,
+            deadline: startDate,
+            tag: selectedTag,
+            // id: chosenTodo.id,
+        });
+        // dispatch(setNewTask({
+        //     ...data,
+        //     deadline: startDate,
+        //     tag: result,
+        // }));
+
+        const tasks = await allTasks.mutateAsync(token);
+        dispatch(setAllTask(null));
+        dispatch(setAllTask(tasks.data.data));
+        dispatch(setTaskInForm(null));
+
+        state.toggle();
     });
 
     const toDelete = async () => {
@@ -115,8 +138,6 @@ export const ActualTaskForm = () => {
         dispatch(setTaskInForm(null));
 
         state.toggle();
-
-        // form.reset();
     };
 
     return (
@@ -185,9 +206,9 @@ export const ActualTaskForm = () => {
                             className = 'button-save-task'
                             type = 'submit'>Save new task</button>
                         { chosenTodo !== null ? <button
-                            onClick = { toCreate }
+                            onClick = { toUpdate }
                             className = 'button-save-task'
-                            type = 'submit'>Update</button>
+                            type = 'submit'>Update task</button>
                             : null }
                     </div>
                 </div>
