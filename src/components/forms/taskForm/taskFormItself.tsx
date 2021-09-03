@@ -1,16 +1,12 @@
 // @ts-nocheck
-// @ts-nocheck
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { createRef } from 'react';
-
 //
 import { useContext } from 'react';
 //
-
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import { useForm } from 'react-hook-form';
@@ -50,9 +46,7 @@ export const ActualTaskForm = () => {
     let theDate;
     let theTag;
 
-    //
     const state = useContext(TaskContext);
-    //
 
     const tags = useSelector((state) => { return state.allTags; });
     const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
@@ -78,7 +72,6 @@ export const ActualTaskForm = () => {
             setStartDate(theDate);
             // Инпут тэг
             theTag = chosenTodo?.tag?.id;
-            console.log('2 theTag', theTag);
             state.setVisible(true);
         }
     }, [chosenTodo]);
@@ -113,13 +106,7 @@ export const ActualTaskForm = () => {
             ...data,
             deadline: startDate,
             tag: selectedTag,
-            // id: chosenTodo.id,
         });
-        // dispatch(setNewTask({
-        //     ...data,
-        //     deadline: startDate,
-        //     tag: result,
-        // }));
 
         const tasks = await allTasks.mutateAsync(token);
         dispatch(setAllTask(null));

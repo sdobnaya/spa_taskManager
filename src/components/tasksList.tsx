@@ -22,8 +22,6 @@ export const TasksList = () => {
 
     let chosenTask;
 
-    // const taskList = document.querySelectorAll('.task');
-
     useEffect(() => {
         const taskList = document.querySelectorAll('.task');
         taskList.forEach((task) => task.addEventListener('click', async (event) => {
@@ -33,12 +31,6 @@ export const TasksList = () => {
             state.setVisible(true);
         }));
     }, [list]);
-
-    // taskList.forEach((task) => task.addEventListener('click', () => {
-    //     if (state.isVisible) {
-    //         state.toggle();
-    //     }
-    // }));
 
     return (
         <div className = 'list'>

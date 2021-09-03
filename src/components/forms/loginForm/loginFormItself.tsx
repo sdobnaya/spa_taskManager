@@ -22,10 +22,6 @@ import { UserContext } from '../../../context/userContext';
 import { schema } from './config';
 import { setAllTask } from '../../../lib/redux/init/actions';
 
-
-// useGetTags();
-
-
 export const ActualLoginForm = () => {
     const token = getFromLocalStorage('token');
 
