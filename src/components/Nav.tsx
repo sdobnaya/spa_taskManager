@@ -2,6 +2,7 @@
 /* Core */
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useLogout } from '../hooks/useLogout';
 
 import { UserContext } from '../context/userContext';
@@ -9,7 +10,14 @@ import { UserContext } from '../context/userContext';
 export const Nav = () => {
     const userState = useContext(UserContext);
 
+    //
+    const completedTasks = useSelector((state) => { return state.setCompletedTasks; });
+    //
+
     const logoutActions = () => {
+        // console.log(completedTasks);
+        localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+        //
         useLogout();
         userState.toggle(userState.loggedIn);
     };

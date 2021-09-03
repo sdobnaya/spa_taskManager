@@ -38,3 +38,16 @@ export const setTaskInForm = (state = null, action) => {
             return state;
     }
 };
+
+export const setCompletedTasks = (state = [], action) => {
+    switch (action.type) {
+        case types.SET_COMPLETED_TASKS:
+            if (typeof action.payload === 'object') {
+                return [...action.payload];
+            }
+
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+};

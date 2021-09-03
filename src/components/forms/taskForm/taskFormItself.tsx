@@ -15,6 +15,7 @@ import { schema } from './config';
 import { setNewTask } from '../../../lib/redux/init/actions';
 import { setAllTask } from '../../../lib/redux/init/actions';
 import { setTaskInForm } from '../../../lib/redux/init/actions';
+import { setCompletedTasks } from '../../../lib/redux/init/actions';
 //
 import { TaskContext } from '../../../context/taskContext';
 //
@@ -51,7 +52,7 @@ export const ActualTaskForm = () => {
     const tags = useSelector((state) => { return state.allTags; });
     const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
     let theId = chosenTodo?.id;
-    console.log('curr obj', chosenTodo);
+    // console.log('curr obj', chosenTodo);
 
     const creation = useCreate();
     const deletion = useDeleteTodo();
@@ -127,11 +128,30 @@ export const ActualTaskForm = () => {
         state.toggle();
     };
 
+    // const completedArr = [];
+
+    // console.log(1, completedArr);
+    // completedArr.push(chosenTodo?.id);
+    // console.log(2, completedArr);
+    //
+
+    // const completedArr = [];
+
+    const toComplete = (event) => {
+        event.preventDefault();
+        //
+        console.log(event.target);
+        //
+        dispatch(setCompletedTasks(chosenTodo?.id));
+
+        console.log(chosenTodo.id);
+    };
+
     return (
         <div className = 'task-card'>
             <form>
                 <div className = 'head'>
-                    <button className = 'button-complete-task'>Завершить</button>
+                    <button onClick = { toComplete } className = 'button-complete-task'>Завершить</button>
                     <div onClick = { toDelete } className = 'button-remove-task'></div>
                 </div>
                 <div className = 'content'>

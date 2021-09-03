@@ -16,6 +16,8 @@ export const TasksList = () => {
 
     const list = useSelector((state) => { return state.allUserTasks; });
 
+    const completedTasks = useSelector((state) => { return state.setCompletedTasks; });
+
     const state = useContext(TaskContext);
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -32,15 +34,35 @@ export const TasksList = () => {
         }));
     }, [list]);
 
+    // let redFlag;
+
+    // useEffect(() => {
+    //     const taskList = document.querySelectorAll('.task');
+    //     taskList.forEach((task) =>
+    //         completedTasks.forEach((id) => {
+    //             if (task.id === id) {
+    //                 // task.className = 'task completed';
+    //                 console.log('вот оно', task.id, id);
+
+    //                 return task;
+    //             }
+    //         }));
+    // }, [completedTasks]);
+
     return (
         <div className = 'list'>
             <div className = 'tasks'>
                 { list?.map((task) => {
+                    let className = 'task';
+                    completedTasks.forEach((id) => {
+                        id === task.id ? className = 'task completed' : null;
+                    });
+
                     return (
                         <div
                             key = { task.id + new Date(task.deadline) }
                             id = { task.id }
-                            className = 'task'>
+                            className = { className } >
                             <span className = 'title'>{ task.title }</span>
                             <div className  = 'meta'>
                                 <span className  = 'deadline'>{ new Date(task.deadline).toLocaleDateString('ru-RU', options) }</span>

@@ -25,3 +25,8 @@ export const setTaskInForm = (payload) => ({
     type: types.SET_TASK_IN_FORM,
     payload,
 });
+
+export const setCompletedTasks = (payload) => ({
+    type: types.SET_COMPLETED_TASKS,
+    payload,
+});

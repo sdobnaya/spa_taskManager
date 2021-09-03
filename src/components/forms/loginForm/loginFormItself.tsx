@@ -21,6 +21,7 @@ import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
 import { UserContext } from '../../../context/userContext';
 import { schema } from './config';
 import { setAllTask } from '../../../lib/redux/init/actions';
+import { setCompletedTasks } from '../../../lib/redux/init/actions';
 
 export const ActualLoginForm = () => {
     const token = getFromLocalStorage('token');
@@ -39,6 +40,15 @@ export const ActualLoginForm = () => {
     });
 
     const logIn = form.handleSubmit(async (data) => {
+        //
+        let completedTasks = localStorage.getItem('completedTasks');
+        completedTasks = JSON.parse(completedTasks);
+        console.log(1111, completedTasks);
+        console.log(222, typeof completedTasks);
+        if (completedTasks.lenght !== 0) {
+            dispatch(setCompletedTasks(completedTasks)); // JSON.stringify(completedTasks)
+        }
+        //
         userState.toggle(userState.loggedIn);
         const token = await login.mutateAsync(data);
 
