@@ -15,9 +15,7 @@ export const Nav = () => {
     //
 
     const logoutActions = () => {
-        // console.log(completedTasks);
         localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-        //
         useLogout();
         userState.toggle(userState.loggedIn);
     };

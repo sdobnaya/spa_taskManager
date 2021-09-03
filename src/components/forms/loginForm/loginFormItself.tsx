@@ -40,15 +40,12 @@ export const ActualLoginForm = () => {
     });
 
     const logIn = form.handleSubmit(async (data) => {
-        //
         let completedTasks = localStorage.getItem('completedTasks');
         completedTasks = JSON.parse(completedTasks);
-        console.log(1111, completedTasks);
-        console.log(222, typeof completedTasks);
-        if (completedTasks.lenght !== 0) {
-            dispatch(setCompletedTasks(completedTasks)); // JSON.stringify(completedTasks)
+        if (completedTasks?.lenght !== 0 && completedTasks !== null) {
+            dispatch(setCompletedTasks(completedTasks));
         }
-        //
+
         userState.toggle(userState.loggedIn);
         const token = await login.mutateAsync(data);
 

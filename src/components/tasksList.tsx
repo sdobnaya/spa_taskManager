@@ -34,21 +34,6 @@ export const TasksList = () => {
         }));
     }, [list]);
 
-    // let redFlag;
-
-    // useEffect(() => {
-    //     const taskList = document.querySelectorAll('.task');
-    //     taskList.forEach((task) =>
-    //         completedTasks.forEach((id) => {
-    //             if (task.id === id) {
-    //                 // task.className = 'task completed';
-    //                 console.log('вот оно', task.id, id);
-
-    //                 return task;
-    //             }
-    //         }));
-    // }, [completedTasks]);
-
     return (
         <div className = 'list'>
             <div className = 'tasks'>
