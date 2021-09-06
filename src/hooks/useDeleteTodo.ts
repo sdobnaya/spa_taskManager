@@ -16,9 +16,6 @@ export const useDeleteTodo = () => {
             return api.deleteTodo(token, credentials);
         },
         {
-            onSuccess() {
-                console.log('Удалено');
-            },
             onError() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 console.log('Ошибка в процессе создания задачи');

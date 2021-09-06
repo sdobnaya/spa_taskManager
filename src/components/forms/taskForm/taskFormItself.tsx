@@ -129,11 +129,8 @@ export const ActualTaskForm = () => {
 
     const toComplete = (event) => {
         event.preventDefault();
-        console.log(event.target);
 
         dispatch(setCompletedTasks(chosenTodo?.id));
-
-        console.log(chosenTodo.id);
     };
 
     return (

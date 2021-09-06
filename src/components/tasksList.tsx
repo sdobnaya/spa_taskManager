@@ -28,7 +28,6 @@ export const TasksList = () => {
         const taskList = document.querySelectorAll('.task');
         taskList.forEach((task) => task.addEventListener('click', async (event) => {
             chosenTask = await getTodoById(event.target.id);
-            console.log('tasklist', chosenTask);
             dispatch(setTaskInForm(chosenTask));
             state.setVisible(true);
         }));
