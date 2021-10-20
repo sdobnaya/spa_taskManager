@@ -10,13 +10,13 @@ export const useLogin = () => {
     const navigate = useNavigate();
 
     const mutation = useMutation(
-        (credentials: any) => {
+        (credentials) => {
             return api.login(credentials);
         },
         {
             onError() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                console.log('Ошибка в процессе логина пользователя');
+                console.log('Ошибка в процессе логина пользователя'); // eslint-disable-line
             },
             onSuccess() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises

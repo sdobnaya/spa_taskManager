@@ -1,10 +1,7 @@
 // @ts-nocheck
 /* Core */
-import { useContext } from 'react';
-//
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTaskInForm } from '../lib/redux/init/actions';
 import { getTodoById } from '../hooks/useTodoById';
 //
@@ -27,7 +24,7 @@ export const TasksList = () => {
     useEffect(() => {
         const taskList = document.querySelectorAll('.task');
         taskList.forEach((task) => task.addEventListener('click', async (event) => {
-            chosenTask = await getTodoById(event.target.id);
+            chosenTask = await getTodoById(event.target.id); // eslint-disable-line no-use-before-define
             dispatch(setTaskInForm(chosenTask));
             state.setVisible(true);
         }));
@@ -39,7 +36,9 @@ export const TasksList = () => {
                 { list?.map((task) => {
                     let className = 'task';
                     completedTasks.forEach((id) => {
-                        id === task.id ? className = 'task completed' : null;
+                        if (id === task.id) {
+                            className = 'task completed';
+                        }
                     });
 
                     return (

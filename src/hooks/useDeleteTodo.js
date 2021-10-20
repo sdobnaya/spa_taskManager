@@ -12,13 +12,13 @@ export const useDeleteTodo = () => {
     const token = getFromLocalStorage('token');
 
     const mutation = useMutation(
-        (credentials: any) => {
+        (credentials) => {
             return api.deleteTodo(token, credentials);
         },
         {
             onError() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                console.log('Ошибка в процессе создания задачи');
+                console.log('Ошибка в процессе создания задачи'); // eslint-disable-line
             },
             onSettled() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises

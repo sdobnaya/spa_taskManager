@@ -21,9 +21,9 @@ export const schema = yup.object().shape({
 
 export const getSignupPlaceholder = () => {
     return {
-        name: 'Имя и фамилия',
-        email: 'Электропочта',
-        password: 'Пароль',
+        name:            'Имя и фамилия',
+        email:           'Электропочта',
+        password:        'Пароль',
         confirmPassword: 'Пароли должны совападать',
     };
 };

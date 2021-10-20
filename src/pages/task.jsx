@@ -1,7 +1,6 @@
 // @ts-nocheck
 /* Core */
-// import { render } from 'react-dom';
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 
 /* Components */
@@ -13,8 +12,8 @@ import { ActualTaskForm } from '../components/forms/taskForm';
 import { TaskContext } from '../context/taskContext';
 import { TasksList } from '../components/tasksList';
 
-export const TaskPage: FC = () => {
-    const state = useContext(TaskContext);
+export const TaskPage = () => {
+    const theState = useContext(TaskContext);
     const list = useSelector((state) => { return state.allUserTasks; });
 
     return (
@@ -23,8 +22,8 @@ export const TaskPage: FC = () => {
             <main>
                 <Controls />
                 <div className = 'wrap' >
-                    { list === [] ? <EmptyList /> : <TasksList/> }
-                    { state.isVisible === true ? <ActualTaskForm /> : null }
+                    { list === [] ? <EmptyList /> : <TasksList /> }
+                    { theState.isVisible === true ? <ActualTaskForm /> : null }
                 </div>
             </main>
             <Footer />

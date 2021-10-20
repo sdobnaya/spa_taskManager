@@ -1,17 +1,14 @@
-/* Core */
-import { FC } from 'react';
-
 /* Components */
 import { Footer } from '../components/Footer';
 import { Nav } from '../components/Nav';
-import { ActualSignupForm } from '../components/forms/signupForm';
+import { ActualLoginForm } from '../components/forms/loginForm';
 
-export const SignupPage: FC = () => {
+export const LoginPage = () => {
     return (
         <>
             <Nav />
             <main>
-                <ActualSignupForm />
+                <ActualLoginForm />
             </main>
             <Footer />
         </>

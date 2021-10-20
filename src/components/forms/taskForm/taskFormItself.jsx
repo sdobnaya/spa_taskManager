@@ -1,32 +1,40 @@
 // @ts-nocheck
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { createRef } from 'react';
-//
-import { useContext } from 'react';
-//
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+// Core
+import {
+    useState,
+    useEffect,
+    createRef,
+    useContext,
+} from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
-import { setNewTask } from '../../../lib/redux/init/actions';
-import { setAllTask } from '../../../lib/redux/init/actions';
-import { setTaskInForm } from '../../../lib/redux/init/actions';
-import { setCompletedTasks } from '../../../lib/redux/init/actions';
-//
+import {
+    setNewTask,
+    setAllTask,
+    setTaskInForm,
+    setCompletedTasks,
+} from '../../../lib/redux/init/actions';
+
 import { TaskContext } from '../../../context/taskContext';
-//
+
 // hooks
-import { useCreate } from '../../../hooks/useCreateTodo';
-import { useAllTasks } from '../../../hooks/useAllTasks';
-import { useDeleteTodo } from '../../../hooks/useDeleteTodo';
-import { useUpdateTodoById } from '../../../hooks/useUpdateTodo';
+import {
+    useCreate,
+    useAllTasks,
+    useDeleteTodo,
+    useUpdateTodoById,
+} from '../../../hooks';
+
 // helpers
-import { getTagInfo } from '../../../helpers/getTagInfo';
-import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
+import { getTagInfo, getFromLocalStorage } from '../../../helpers';
+
 
 registerLocale('ru', ru);
 
@@ -45,9 +53,8 @@ export const ActualTaskForm = () => {
     const inputTitle = createRef();
     const inputDescription = createRef();
     let theDate;
-    let theTag;
 
-    const state = useContext(TaskContext);
+    const theState = useContext(TaskContext);
 
     const tags = useSelector((state) => { return state.allTags; });
     const chosenTodo = useSelector((state) => { return state.setTaskInForm; });
@@ -71,8 +78,7 @@ export const ActualTaskForm = () => {
             theDate = new Date(chosenTodo?.deadline);
             setStartDate(theDate);
             // Инпут тэг
-            theTag = chosenTodo?.tag?.id;
-            state.setVisible(true);
+            theState.setVisible(true);
         }
     }, [chosenTodo]);
 
@@ -81,7 +87,7 @@ export const ActualTaskForm = () => {
         await creation.mutateAsync({
             ...data,
             deadline: startDate,
-            tag: selectedTag,
+            tag:      selectedTag,
         });
 
         const result = getTagInfo(selectedTag, tags);
@@ -89,7 +95,7 @@ export const ActualTaskForm = () => {
         dispatch(setNewTask({
             ...data,
             deadline: startDate,
-            tag: result,
+            tag:      result,
         }));
 
         const tasks = await allTasks.mutateAsync(token);
@@ -97,15 +103,14 @@ export const ActualTaskForm = () => {
         dispatch(setAllTask(tasks.data.data));
         dispatch(setTaskInForm(null));
 
-        state.toggle();
+        theState.toggle();
     });
 
     const toUpdate = form.handleSubmit(async (data) => {
-        console.log('toUpdate', data);
         await updating.mutateAsync({
             ...data,
             deadline: startDate,
-            tag: selectedTag,
+            tag:      selectedTag,
         });
 
         const tasks = await allTasks.mutateAsync(token);
@@ -113,7 +118,7 @@ export const ActualTaskForm = () => {
         dispatch(setAllTask(tasks.data.data));
         dispatch(setTaskInForm(null));
 
-        state.toggle();
+        theState.toggle();
     });
 
     const toDelete = async () => {
@@ -124,7 +129,7 @@ export const ActualTaskForm = () => {
         dispatch(setAllTask(tasks.data.data));
         dispatch(setTaskInForm(null));
 
-        state.toggle();
+        theState.toggle();
     };
 
     const toComplete = (event) => {
@@ -162,7 +167,7 @@ export const ActualTaskForm = () => {
                                 locale = { ru }
                                 placeholderText = 'Выберите дату'
                                 dateFormat = 'dd MMMM yyyy'
-                                showDisabledMonthNavigation/>
+                                showDisabledMonthNavigation />
                         </span>
                     </div>
                     <div className = 'description'>

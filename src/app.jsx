@@ -1,13 +1,10 @@
 // Core
-import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Components
 import { LoginPage, SignupPage, TaskPage } from './pages';
 
-// Instruments
-
-export const App: FC = () => {
+export const App = () => {
     return (
         <>
             <Routes>

@@ -9,13 +9,13 @@ export const useSignup = () => {
     const navigate = useNavigate();
 
     const mutation = useMutation(
-        (credentials: any) => {
+        (credentials) => {
             return api.signup(credentials);
         },
         {
             onError() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                console.log('Ошибка в процессе регистрации пользователя');
+                console.log('Ошибка в процессе регистрации пользователя'); // eslint-disable-line
             },
             onSuccess() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises

@@ -6,14 +6,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './config';
 
 import { useSignup } from '../../../hooks/useSignup';
-import { Input } from '../elements/input';
+import { Input } from '../elements/input'; // eslint-disable-line
 import { UserContext } from '../../../context/userContext';
 import { useGetTags } from '../../../hooks/useGetTags';
 
 export const ActualSignupForm = () => {
     const signup = useSignup();
     const userState = useContext(UserContext);
-    useGetTags();
+    useGetTags(); // eslint-disable-line no-use-before-define
 
     const form = useForm({
         mode:     'onTouched',

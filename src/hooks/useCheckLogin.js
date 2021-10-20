@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useContext } from 'react';
-import { UserContext } from '../context/userContext';
+import { UserContext } from '../context/userContext'; // eslint-disable-line
 import { getFromLocalStorage } from '../helpers/getFromLocalStorage';
 
 export const useCheckLogin = () => {
