@@ -2,8 +2,17 @@
 import { combineReducers } from 'redux';
 
 // Reducers
-
+import { userToken } from './reducers';
+import { allUserTasks } from './reducers';
+import { allTags } from './reducers';
+import { setTaskInForm } from './reducers';
+import { setCompletedTasks } from './reducers';
 
 export const rootReducer = combineReducers({
-    tmp: () => ({}),
+    userToken,
+    allUserTasks,
+    allTags,
+    setTaskInForm,
+    setCompletedTasks,
 });
+

@@ -1,5 +1,7 @@
+// @ts-nocheck
 // Core
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 
@@ -13,11 +15,20 @@ import './theme/styles/index.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { TaskContextProvider } from './context/taskContext';
+import { UserContextProvider } from './context/userContext';
+
 render(
     <Provider store = { store }>
-        <QueryClientProvider client = { queryClient }>
-            <App />
-        </QueryClientProvider>
+        <UserContextProvider>
+            <TaskContextProvider>
+                <QueryClientProvider client = { queryClient }>
+                    <Router>
+                        <App />
+                    </Router>
+                </QueryClientProvider>
+            </TaskContextProvider>
+        </UserContextProvider>
     </Provider>,
     document.getElementById('root'),
     () => {

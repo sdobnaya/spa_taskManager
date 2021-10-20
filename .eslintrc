@@ -266,7 +266,7 @@
     ],
     "no-restricted-properties": "error",
     "no-return-assign": [
-      "error",
+      "warn",
       "except-parens"
     ],
     "no-return-await": "error",
@@ -359,7 +359,7 @@
     "implicit-arrow-linebreak": "warn",
     "indent": "off",
     "key-spacing": [
-      "error",
+      "warn",
       {
         "beforeColon": false,
         "afterColon": true,
@@ -381,7 +381,7 @@
     "max-depth": 0,
     "max-len": [
       "error",
-      100,
+      200,
       {
         "ignoreTemplateLiterals": true,
         "ignoreStrings": true,
@@ -555,6 +555,9 @@
     "react/react-in-jsx-scope": 0,
     "react/jsx-tag-spacing": ["warn", {
       "beforeSelfClosing": "always"
-    }]
+    }],
+      // note you must disable the base rule as it can report incorrect errors
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["warn"]
   }
 }
