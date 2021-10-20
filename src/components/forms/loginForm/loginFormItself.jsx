@@ -7,27 +7,27 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // Components
-import { Input } from '../elements/input';
+import { Input } from '../elements/input'; // eslint-disable-line
 
 // Hooks & Helpers
 import { useAutoAuthorization } from '../../../hooks/useAutoAuthorization';
 import { useAllTasks } from '../../../hooks/useAllTasks';
 import { useLogin } from '../../../hooks/useLogin';
-import { useGetTags } from '../../../hooks/useGetTags'; // djn
+import { useGetTags } from '../../../hooks/useGetTags';
 
 import { getFromLocalStorage } from '../../../helpers/getFromLocalStorage';
 
 // Other
 import { UserContext } from '../../../context/userContext';
 import { schema } from './config';
-import { setAllTask } from '../../../lib/redux/init/actions';
-import { setCompletedTasks } from '../../../lib/redux/init/actions';
+import { setAllTask, setCompletedTasks } from '../../../lib/redux/init/actions';
+
 
 export const ActualLoginForm = () => {
     const token = getFromLocalStorage('token');
 
     const authorization = useAutoAuthorization();
-    const login = useLogin();
+    const login = useLogin(); // eslint-disable-line no-use-before-define
     const allTasks = useAllTasks(token);
     useGetTags();
 
@@ -47,11 +47,11 @@ export const ActualLoginForm = () => {
         }
 
         userState.toggle(userState.loggedIn);
-        const token = await login.mutateAsync(data);
+        const theToken = await login.mutateAsync(data);
 
-        const tasks = await allTasks.mutateAsync(token);
+        const tasks = await allTasks.mutateAsync(theToken);
 
-        authorization;
+        authorization(); // дивуар
 
         dispatch(setAllTask(tasks.data.data));
 

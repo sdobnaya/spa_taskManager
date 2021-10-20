@@ -11,13 +11,13 @@ export const useCreate = () => {
     const token = getFromLocalStorage('token');
 
     const mutation = useMutation(
-        (credentials: any) => {
+        (credentials) => {
             return api.createTodo(token, credentials);
         },
         {
             onError() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                console.log('Ошибка в процессе создания задачи');
+                console.log('Ошибка в процессе создания задачи'); // eslint-disable-line
             },
             onSettled() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises

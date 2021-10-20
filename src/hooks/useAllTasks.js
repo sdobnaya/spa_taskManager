@@ -13,7 +13,7 @@ export const useAllTasks = (token) => {
         {
             onError() {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                console.log('Ошибка в процессе загрузки задач пользователя');
+                console.log('Ошибка в процессе загрузки задач пользователя'); // eslint-disable-line
             },
         },
     );

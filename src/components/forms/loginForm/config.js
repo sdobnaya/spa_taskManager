@@ -13,7 +13,7 @@ export const schema = yup.object().shape({
 
 export const getLoginPlaceholder = () => {
     return {
-        email: 'Электропочта',
+        email:    'Электропочта',
         password: 'Пароль',
     };
 };

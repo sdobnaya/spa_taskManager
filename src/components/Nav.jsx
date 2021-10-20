@@ -16,7 +16,7 @@ export const Nav = () => {
 
     const logoutActions = () => {
         localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-        useLogout();
+        useLogout(); // eslint-disable-line no-use-before-define
         userState.toggle(userState.loggedIn);
     };
 

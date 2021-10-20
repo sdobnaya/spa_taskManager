@@ -1,11 +1,11 @@
 // Core
-import { QueryClient, QueryOptions } from 'react-query';
+import { QueryClient } from 'react-query';
 import axios from 'axios';
 
 // Other
 import { TODO_API_URL } from '../../api';
 
-const defaultQueryFn = async (options: QueryOptions) => {
+const defaultQueryFn = async (options) => {
     const { queryKey } = options;
 
     let endpoint = queryKey?.[ 0 ];
